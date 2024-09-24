@@ -6,7 +6,6 @@ const {
   updateCartItem,
   checkout,// Ensure this is properly imported
   checkStock, // Ensure this is properly imported
-  clearCart // Ensure this is properly imported
 } = require('../controllers/cartController'); // Check the correct path
 
 const router = express.Router();
@@ -17,7 +16,6 @@ router.get('/:userId', getCartItems);
 router.delete('/:id', removeCartItem);
 router.put('/:id', updateCartItem);
 router.get('/check-stock/:productId', checkStock);
-router.delete('/clear/:userId', clearCart); // เส้นทางสำหรับลบสินค้าจากตะกร้า
 // Checkout route
 router.post('/checkout', checkout); // Ensure checkout is correctly assigned
 

@@ -146,6 +146,19 @@ export class CartComponent implements OnInit {
       return;
     }
   
+    const token = localStorage.getItem('token');
+    if (!token) {
+      Swal.fire(
+        'Error',
+        'Please log in to proceed with checkout.',
+        'error'
+      );
+      return;
+    }
+  
+    const decoded: any = jwtDecode(token); // ดึง userId จาก token
+    const userId = decoded.id;
+  
     let outOfStockItems = [];
     let stockChecked = 0;
   
@@ -153,7 +166,7 @@ export class CartComponent implements OnInit {
       this.cartService.checkStock(item.ProductId).subscribe(
         (product) => {
           stockChecked++;
-          if (product.stock < item.Quantity) {
+          if (product.Stock < item.Quantity) {
             outOfStockItems.push(item);
           }
   
@@ -168,6 +181,7 @@ export class CartComponent implements OnInit {
               const cartData = {
                 items: this.selectedItems,
                 total: this.totalAmount,
+                userId: userId, // เพิ่ม userId ใน cartData
               };
   
               this.cartService.checkout(cartData).subscribe(
@@ -178,18 +192,13 @@ export class CartComponent implements OnInit {
                     'success'
                   );
   
-                  // เรียก API เพื่อล้างข้อมูลใน cart ที่ฐานข้อมูล
-                  const token = localStorage.getItem('token');
-                  if (token) {
-                    const decoded: any = jwtDecode(token);
-                    const userId = decoded.id;
+                  // ลบเฉพาะรายการที่ถูก checkout ออกจาก cartItems
+                  this.cartItems = this.cartItems.filter(
+                    (item) => !this.selectedItems.includes(item)
+                  );
   
-                    this.cartService.clearCart(userId).subscribe(() => {
-                      this.cartItems = [];
-                      this.selectedItems = [];
-                      this.totalAmount = 0;
-                    });
-                  }
+                  this.selectedItems = [];
+                  this.calculateTotal();
                 },
                 (error) => {
                   console.error('Error during checkout:', error);
