@@ -1,0 +1,9 @@
+/* ตัวอย่าง CSS สำหรับ Admin Dashboard */
+.container {
+    max-width: 1200px;
+  }
+  
+  .btn-block {
+    margin-bottom: 10px;
+  }
+  

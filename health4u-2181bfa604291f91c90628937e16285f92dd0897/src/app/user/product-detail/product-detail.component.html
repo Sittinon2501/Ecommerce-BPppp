@@ -1,0 +1,37 @@
+<div *ngIf="product" class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <img [src]="'http://localhost:3000' + product.ImageUrl" alt="Product Image" class="img-fluid">
+    </div>
+    <div class="col-md-6">
+      <h2>{{ product.ProductName }}</h2>
+      <p>{{ product.Description }}</p>
+      <p><strong>Price:</strong> {{ product.Price | number:'1.2-2' }} THB</p>
+      <p><strong>Stock:</strong> {{ product.Stock }}</p>
+
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input 
+          type="number" 
+          id="quantity" 
+          class="form-control" 
+          [(ngModel)]="quantity" 
+          min="1" 
+          [max]="product.Stock" 
+          [disabled]="product.Stock === 0">
+      </div>
+
+      <!-- ปุ่ม Add to Cart จะแสดงเฉพาะเมื่อ userRole เป็น User และ Stock ต้องไม่เป็น 0 -->
+      <button 
+        *ngIf="userRole?.trim() === 'User'" 
+        class="btn btn-primary" 
+        (click)="addToCart()" 
+        [disabled]="product.Stock === 0 || quantity > product.Stock || quantity <= 0">
+        Add to Cart
+      </button>
+
+      <!-- ข้อความแจ้งเตือนเมื่อ Stock หมด -->
+      <p *ngIf="product.Stock === 0" class="text-danger">This product is out of stock</p>
+    </div>
+  </div>
+</div>

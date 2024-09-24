@@ -1,0 +1,41 @@
+.card-img-top {
+  width: 100%; /* กำหนดความกว้างเป็น 100% ของ container */
+  
+  height: auto; /* ให้ความสูงเป็นอัตโนมัติ */
+}
+.card {
+  width: 200px; /* กำหนดความกว้างตามที่ต้องการ */
+  margin: auto; /* ให้ card อยู่กลาง */
+}
+.card .btn {
+  width: 100%; /* ให้ปุ่มกว้าง 100% */
+  margin: 0; /* ไม่มี margin */
+}
+.card {
+  display: flex;
+  flex-direction: column; /* ทำให้ card ขยายแนวตั้ง */
+  height: 100%; /* ให้ card ขยายเต็มความสูง */
+}
+
+.card-img-top {
+  width: 100%; /* ให้รูปภาพเต็มความกว้างของ card */
+  height: 200px; /* กำหนดความสูงที่แน่นอน */
+  object-fit: cover; /* ทำให้รูปภาพไม่เสียสัดส่วน */
+}
+
+.card-body {
+  flex-grow: 1; /* ทำให้ body ของ card ขยายเต็มที่ */
+}
+.carousel {
+  width: 800px;
+  height: 400px;
+  margin: auto;
+  margin-bottom: 30px; /* เพิ่มระยะห่างด้านล่างของ Carousel */
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+

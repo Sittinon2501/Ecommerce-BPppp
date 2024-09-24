@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Skincare E-Commerce</a>
+
+  <!-- เมนูแสดงเมื่อผู้ใช้ล็อกอิน -->
+  <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+    <!-- แสดงลิงก์ Admin Dashboard ถ้า userRole เป็น Admin -->
+    <li class="nav-item" *ngIf="userRole === 'Admin'">
+      <a class="nav-link" routerLink="/admin/dashboard">Admin Dashboard</a>
+    </li>
+    
+    <!-- ถ้าไม่ใช่ Admin แสดงลิงก์อื่นๆ เช่น Product, Cart -->
+    <li class="nav-item" *ngIf="userRole !== 'Admin'">
+      <a class="nav-link" routerLink="/products">Products</a>
+    </li>
+    <li class="nav-item" *ngIf="userRole !== 'Admin'">
+      <a class="nav-link" routerLink="/cart">Cart</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" (click)="logout()">Logout</a>
+    </li>
+  </ul>
+
+  <!-- เมนูแสดงเมื่อผู้ใช้ยังไม่ล็อกอิน -->
+  <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/register">Register</a>
+    </li>
+  </ul>
+</nav>

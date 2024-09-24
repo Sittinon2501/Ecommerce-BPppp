@@ -1,0 +1,45 @@
+<div class="container mt-4">
+    <h2>Manage Categories</h2>
+  
+    <!-- Form เพิ่มหมวดหมู่ -->
+    <form [formGroup]="categoryForm" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="CategoryName">Category Name</label>
+        <input type="text" id="CategoryName" class="form-control" formControlName="CategoryName" />
+      </div>
+    
+      <div class="form-group">
+        <label for="image">Category Image</label>
+        <input type="file" id="image" class="form-control" (change)="onFileSelected($event)" />
+      </div>
+    
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+  
+    <!-- แสดงรายการหมวดหมู่ -->
+    <div class="mt-4">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories">
+            <td>
+              <img [src]="'http://localhost:3000' + category.ImageUrl" alt="Category Image" width="50">
+            </td>
+            <td>{{ category.CategoryName }}</td>
+            <td>
+              <button class="btn btn-info btn-sm" (click)="editCategory(category)">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteCategory(category.CategoryId)" style="margin-left: 10px;">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -1,0 +1,44 @@
+<!-- แสดง Navbar เมื่อ showNavbar เป็น true -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="showNavbar">
+  <a class="navbar-brand" href="#">Skincare E-Commerce</a>
+  
+  <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+    <li class="nav-item" *ngIf="userRole === 'Admin'">
+      <a class="nav-link" routerLink="/admin/dashboard">Admin Dashboard</a>
+    </li>
+    <li class="nav-item" *ngIf="userRole === 'Admin'">
+      <a class="nav-link" routerLink="/products">Products</a>
+    </li>
+    <li class="nav-item" *ngIf="userRole !== 'Admin'">
+      <a class="nav-link" routerLink="/products">Products</a>
+    </li>
+    <li class="nav-item" *ngIf="userRole !== 'Admin'">
+      <a class="nav-link" routerLink="/cart">Cart</a>
+    </li>
+    <li class="nav-item" *ngIf="userRole !== 'Admin'">
+      <a class="nav-link" routerLink="/orders">Order</a>
+    </li>
+    <li class="nav-item" *ngIf="userRole !== 'Admin'">
+      <a class="nav-link" routerLink="/blogs">blogs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="logout()">Logout</a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/register">Register</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- ที่แสดงเนื้อหาของแต่ละหน้า -->
+<div class="container mt-3">
+  <router-outlet></router-outlet>
+  
+</div>
+<app-footer></app-footer>

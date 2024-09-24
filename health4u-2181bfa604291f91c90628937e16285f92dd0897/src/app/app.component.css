@@ -1,0 +1,11 @@
+/* ตัวอย่าง CSS สำหรับจัดการ Layout */
+.container {
+    min-height: 80vh; /* กำหนดความสูงขั้นต่ำของ container */
+  }
+  
+  footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+  }
+  

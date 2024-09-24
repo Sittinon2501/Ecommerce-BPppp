@@ -1,0 +1,46 @@
+.btn-primary {
+  background-color: #007bff; /* พื้นหลังสีน้ำเงิน */
+  border: 2px solid #007bff; /* ขอบสีน้ำเงิน */
+  color: white; /* สีตัวอักษรขาว */
+  padding: 10px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease; 
+  /* รวม transition ของสี, ขอบ, และเงา */
+}
+
+.btn-primary:hover {
+  background-color: white; /* เปลี่ยนพื้นหลังเป็นสีขาวเมื่อ hover */
+  color: #007bff; /* เปลี่ยนสีตัวอักษรเป็นสีน้ำเงิน */
+  border: 2px solid #007bff; /* ขอบสีน้ำเงิน */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* เพิ่มเงาเมื่อ hover */
+}
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* ทำให้ card ขยายเต็มความสูง */
+  width: 100%; /* ปรับ card ให้เต็มคอลัมน์ */
+  margin: auto;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* กระจายเนื้อหาให้ปุ่ม View Details อยู่ด้านล่าง */
+  flex-grow: 1; /* ขยาย card-body ให้เต็มพื้นที่ที่เหลือ */
+}
+
+.card-title {
+  min-height: 50px; /* กำหนดความสูงขั้นต่ำให้ชื่อสินค้า เพื่อไม่ให้การ์ดยืดหรือหด */
+  margin-bottom: 10px; /* เพิ่ม margin ด้านล่างให้ดูสวยงาม */
+}
+
+.card-text {
+  margin-bottom: auto; /* ทำให้ข้อความราคาตรงกันในทุกการ์ด */
+}
+
+.card .btn {
+  width: 100%; /* ทำให้ปุ่มมีความกว้าง 100% */
+  margin-top: 10px; /* เพิ่มระยะห่างจากเนื้อหาด้านบน */
+}
