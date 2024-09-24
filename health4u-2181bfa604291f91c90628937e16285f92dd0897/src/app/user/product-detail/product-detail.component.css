@@ -1,0 +1,41 @@
+.container {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .text-danger {
+    font-weight: bold;
+  }
+  
+  .img-fluid {
+    border-radius: 10px;
+  }
+  
+  .form-group {
+    margin-top: 15px;
+  }
+  
+  label {
+    font-size: 1.1em;
+  }
+  
+  .bi {
+    margin-right: 5px;
+  }
+  

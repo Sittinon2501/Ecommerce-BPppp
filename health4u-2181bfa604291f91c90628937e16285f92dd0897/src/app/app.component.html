@@ -7,19 +7,29 @@
     </div>
     <ul class="list-unstyled components p-3">
       <li>
-        <a routerLink="/admin/dashboard" class="nav-link text-dark">Admin Dashboard</a>
+        <a routerLink="/admin/dashboard" class="nav-link text-dark">
+          <i class="bi bi-speedometer2"></i> Admin Dashboard
+        </a>
       </li>
       <li>
-        <a routerLink="/admin/products" class="nav-link text-dark">Manage Products</a>
+        <a routerLink="/admin/products" class="nav-link text-dark">
+          <i class="bi bi-box-seam"></i> Manage Products
+        </a>
       </li>
       <li>
-        <a routerLink="/admin/orders" class="nav-link text-dark">Manage Orders</a>
+        <a routerLink="/admin/orders" class="nav-link text-dark">
+          <i class="bi bi-card-list"></i> Manage Orders
+        </a>
       </li>
       <li>
-        <a routerLink="/admin/categories" class="nav-link text-dark">Manage Categories</a>
+        <a routerLink="/admin/categories" class="nav-link text-dark">
+          <i class="bi bi-tags"></i> Manage Categories
+        </a>
       </li>
       <li>
-        <a (click)="logout()" class="nav-link text-danger">Logout</a>
+        <a (click)="logout()" class="nav-link text-danger">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
       </li>
     </ul>
   </nav>
@@ -33,33 +43,51 @@
 <!-- User Navbar -->
 <ng-template #userNavbar>
   <nav *ngIf="showNavbar" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Skincare E-Commerce</a>
+    <a class="navbar-brand" href="#">
+      <i class="bi bi-basket"></i> Health4U
+    </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- Left aligned nav items (Products and Blogs) -->
+      <!-- Left aligned nav items (Categories, Products, and Blogs) -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" *ngIf="userRole !== 'Admin'">
-          <a class="nav-link" routerLink="/products">Products</a>
+          <a class="nav-link" routerLink="/products">
+            <i class="bi bi-box-seam"></i> Products
+          </a>
         </li>
         <li class="nav-item" *ngIf="userRole !== 'Admin'">
-          <a class="nav-link" routerLink="/blogs">Blogs</a>
+          <a class="nav-link" routerLink="/categories">
+            <i class="bi bi-tags"></i> Categories
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="userRole !== 'Admin'">
+          <a class="nav-link" routerLink="/blogs">
+            <i class="bi bi-journal-text"></i> Blogs
+          </a>
         </li>
       </ul>
 
       <!-- Right aligned nav items (Cart, Orders, and Logout) -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item" *ngIf="userRole !== 'Admin'">
-          <a class="nav-link" routerLink="/cart">Cart</a>
+          <a class="nav-link" routerLink="/cart">
+            <i class="bi bi-cart"></i> Cart
+          </a>
         </li>
         <li class="nav-item" *ngIf="userRole !== 'Admin'">
-          <a class="nav-link" routerLink="/orders">Orders</a>
+          <a class="nav-link" routerLink="/orders">
+            <i class="bi bi-receipt"></i> Orders
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger font-weight-bold" (click)="logout()">Logout</a>
+          <a class="nav-link text-danger font-weight-bold" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i> Logout
+          </a>
         </li>
       </ul>
     </div>

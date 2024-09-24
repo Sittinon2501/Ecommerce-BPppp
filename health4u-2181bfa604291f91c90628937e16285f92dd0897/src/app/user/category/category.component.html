@@ -1,48 +1,63 @@
 <!-- category.component.html -->
 <div class="container mt-4">
-  <!-- Carousel -->
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 800px; height: 400px; margin: auto;">
+  <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://via.placeholder.com/800x400" class="d-block w-100 carousel-image" alt="...">
+      <div class="carousel-item active" data-bs-interval="10000">
+        <img
+          src="https://kassa-bnnvara.cdn.prepr.io/%7Bformat%7D/5d9lrb18nxzs-skincare.jpg"
+          class="d-block w-100" alt="Skincare Products">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Natural Skincare</h5>
+          <p>Explore the best skincare products for your skin's health.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="https://img.kapook.com/u/2020/jutharat/qq1/zxx11.jpg"
+          class="d-block w-100" alt="Skincare Routine">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Skincare Routine</h5>
+          <p>Follow a healthy routine to keep your skin glowing every day.</p>
+        </div>
       </div>
       <div class="carousel-item">
-        <img src="https://via.placeholder.com/800x400" class="d-block w-100 carousel-image" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="https://via.placeholder.com/800x400" class="d-block w-100 carousel-image" alt="...">
+        <img
+          src="https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1024-512,f_auto,q_auto:best/rockcms/2024-01/240117-staff-skin-care-routines-social-2c85d8.jpg"
+          class="d-block w-100" alt="Skincare Ingredients">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Natural Ingredients</h5>
+          <p>Discover skincare made from organic and natural ingredients.</p>
+        </div>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-</div>
 
+
+  <div class="container mt-4">
+    <h2 style="text-align: center;">Categories</h2>
   
-<div class="container mt-4">
-  <h2 style="text-align: center;">Categories</h2>
-
-  <div class="row">
-    <div class="col-md-4 mb-3" *ngFor="let category of categories">
-      <div class="card">
-        <img [src]="'http://localhost:3000' + category.ImageUrl" class="card-img-top" alt="Category Image" width="5">
-        <div class="card-body">
-          <a (click)="viewProducts(category.CategoryId)" class="btn btn-primary">
-            {{ category.CategoryName }} <!-- เปลี่ยน "View Products" เป็นชื่อหมวดหมู่ -->
-          </a>
+    <div class="row">
+      <div class="col-md-4 mb-3" *ngFor="let category of categories">
+        <div class="card" (click)="viewProducts(category.CategoryId)" style="cursor: pointer;"> <!-- ทำให้ card กดได้ -->
+          <img [src]="'http://localhost:3000' + category.ImageUrl" class="card-img-top" alt="Category Image" width="5">
+          <div class="card-body">
+            <h5 class="card-title">{{ category.CategoryName }}</h5> <!-- แสดงชื่อหมวดหมู่ -->
+          </div>
         </div>
       </div>
-    </div>    
+    </div>
   </div>
-</div>
+  

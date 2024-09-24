@@ -1,88 +1,104 @@
-/* Container Styling */
+/* General container styling */
+/* General container styling */
 .container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Form Styling */
-  form label {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-  }
-  
-  .form-control {
-    padding: 10px;
-    font-size: 1rem;
-  }
-  
-  .form-control-file {
-    padding: 8px;
-  }
-  
-  /* Table Styling */
-  .table {
-    margin-top: 20px;
-    font-size: 1rem;
-  }
-  
-  .table-hover tbody tr:hover {
-    background-color: #f8f9fa;
-  }
-  
-  .table thead th {
-    background-color: #f1f1f1;
-    font-weight: bold;
-  }
-  
-  .table img {
-    border-radius: 10px;
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .table img:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-  }
-  
-  /* Button Styling */
-  .btn {
-    padding: 8px 12px;
-    font-size: 0.875rem;
-  }
-  
-  .btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-  }
-  
-  .btn:hover {
-    opacity: 0.85;
-  }
-  
-  .btn-block {
-    width: 100%;
-  }
-  
-  .mt-3 {
-    margin-top: 1rem !important;
-  }
-  
-  .mt-5 {
-    margin-top: 3rem !important;
-  }
-  
-  .ml-2 {
-    margin-left: 10px !important;
-  }
-  /* Table Header Styling */
+  max-width: 1300px; /* ปรับขนาดเป็น 1200px */
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+h2 {
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Form styling */
+form {
+  margin-bottom: 40px;
+}
+
+.form-control, .form-select {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Table styling */
+.table {
+  width: 100%;
+  margin-top: 20px;
+}
+
 .table thead th {
-    background-color: #007bff; /* สีน้ำเงิน */
-    color: #fff; /* สีฟอนต์เป็นสีขาว */
-    font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.table tbody td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table img {
+  border-radius: 5px;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: white;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Button styling */
+button {
+  border-radius: 5px;
+}
+
+button.btn-sm {
+  font-size: 14px;
+  padding: 5px 10px;
 }

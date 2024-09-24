@@ -1,41 +1,68 @@
-.card-img-top {
-  width: 100%; /* กำหนดความกว้างเป็น 100% ของ container */
-  
-  height: auto; /* ให้ความสูงเป็นอัตโนมัติ */
-}
-.card {
-  width: 200px; /* กำหนดความกว้างตามที่ต้องการ */
-  margin: auto; /* ให้ card อยู่กลาง */
-}
-.card .btn {
-  width: 100%; /* ให้ปุ่มกว้าง 100% */
-  margin: 0; /* ไม่มี margin */
-}
-.card {
-  display: flex;
-  flex-direction: column; /* ทำให้ card ขยายแนวตั้ง */
-  height: 100%; /* ให้ card ขยายเต็มความสูง */
-}
-
-.card-img-top {
-  width: 100%; /* ให้รูปภาพเต็มความกว้างของ card */
-  height: 200px; /* กำหนดความสูงที่แน่นอน */
-  object-fit: cover; /* ทำให้รูปภาพไม่เสียสัดส่วน */
-}
-
-.card-body {
-  flex-grow: 1; /* ทำให้ body ของ card ขยายเต็มที่ */
-}
+/* Carousel Styling */
 .carousel {
-  width: 800px;
-  height: 400px;
-  margin: auto;
-  margin-bottom: 30px; /* เพิ่มระยะห่างด้านล่างของ Carousel */
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.carousel-image {
-  width: 100%;
-  height: 100%;
+.carousel-item img {
+  height: 400px; /* ปรับความสูงของรูปภาพ */
   object-fit: cover;
 }
 
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5); /* เพิ่มพื้นหลังโปร่งใส */
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+  background-color: #007bff; /* เปลี่ยนสีของไอคอน */
+  border-radius: 50%; /* ทำให้ไอคอนเป็นวงกลม */
+  padding: 10px;
+}
+
+/* Category Card Styling */
+.card {
+  border: none; /* เอาเส้นขอบออก */
+  transition: transform 0.3s ease; /* เพิ่มเอฟเฟกต์ hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้ card */
+}
+
+.card:hover {
+  transform: scale(1.05); /* ขยายเมื่อ hover */
+}
+
+.card-img-top {
+  border-radius: 10px 10px 0 0; /* ทำมุมโค้ง */
+  height: 200px; /* กำหนดความสูงที่คงที่ */
+  object-fit: cover; /* ให้รูปภาพเติมเต็มพื้นที่โดยไม่เสียสัดส่วน */
+}
+
+.card-body {
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.card-body .btn {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.card-body .btn:hover {
+  background-color: #0056b3;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
