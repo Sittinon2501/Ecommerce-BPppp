@@ -1,44 +1,69 @@
-<!-- แสดง Navbar เมื่อ showNavbar เป็น true -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="showNavbar">
-  <a class="navbar-brand" href="#">Skincare E-Commerce</a>
-  
-  <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-    <li class="nav-item" *ngIf="userRole === 'Admin'">
-      <a class="nav-link" routerLink="/admin/dashboard">Admin Dashboard</a>
-    </li>
-    <li class="nav-item" *ngIf="userRole === 'Admin'">
-      <a class="nav-link" routerLink="/products">Products</a>
-    </li>
-    <li class="nav-item" *ngIf="userRole !== 'Admin'">
-      <a class="nav-link" routerLink="/products">Products</a>
-    </li>
-    <li class="nav-item" *ngIf="userRole !== 'Admin'">
-      <a class="nav-link" routerLink="/cart">Cart</a>
-    </li>
-    <li class="nav-item" *ngIf="userRole !== 'Admin'">
-      <a class="nav-link" routerLink="/orders">Order</a>
-    </li>
-    <li class="nav-item" *ngIf="userRole !== 'Admin'">
-      <a class="nav-link" routerLink="/blogs">blogs</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="logout()">Logout</a>
-    </li>
-  </ul>
+<!-- Admin Sidebar -->
+<div *ngIf="showNavbar && userRole === 'Admin'; else userNavbar" class="d-flex">
+  <!-- Sidebar ของ Admin -->
+  <nav id="admin-sidebar" class="bg-light border-right vh-100">
+    <div class="sidebar-header p-3 bg-primary text-white text-center">
+      <h4>Admin Page</h4>
+    </div>
+    <ul class="list-unstyled components p-3">
+      <li>
+        <a routerLink="/admin/dashboard" class="nav-link text-dark">Admin Dashboard</a>
+      </li>
+      <li>
+        <a routerLink="/admin/products" class="nav-link text-dark">Manage Products</a>
+      </li>
+      <li>
+        <a routerLink="/admin/orders" class="nav-link text-dark">Manage Orders</a>
+      </li>
+      <li>
+        <a routerLink="/admin/categories" class="nav-link text-dark">Manage Categories</a>
+      </li>
+      <li>
+        <a (click)="logout()" class="nav-link text-danger">Logout</a>
+      </li>
+    </ul>
+  </nav>
 
-  <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/login">Login</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/register">Register</a>
-    </li>
-  </ul>
-</nav>
-
-<!-- ที่แสดงเนื้อหาของแต่ละหน้า -->
-<div class="container mt-3">
-  <router-outlet></router-outlet>
-  
+  <!-- Content สำหรับ Admin -->
+  <div id="content" class="w-100 p-4">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<app-footer></app-footer>
+
+<!-- User Navbar -->
+<ng-template #userNavbar>
+  <nav *ngIf="showNavbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Skincare E-Commerce</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="userRole !== 'Admin'">
+          <a class="nav-link" routerLink="/products">Products</a>
+        </li>
+        <li class="nav-item" *ngIf="userRole !== 'Admin'">
+          <a class="nav-link" routerLink="/cart">Cart</a>
+        </li>
+        <li class="nav-item" *ngIf="userRole !== 'Admin'">
+          <a class="nav-link" routerLink="/orders">Orders</a>
+        </li>
+        <li class="nav-item" *ngIf="userRole !== 'Admin'">
+          <a class="nav-link" routerLink="/blogs">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger font-weight-bold" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Footer component ที่จะถูกแสดงเฉพาะเมื่อ userRole ไม่ใช่ 'Admin' -->
+  <app-footer *ngIf="userRole !== 'Admin'"></app-footer>
+</ng-template>

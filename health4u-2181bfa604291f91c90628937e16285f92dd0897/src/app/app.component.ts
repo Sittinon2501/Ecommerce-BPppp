@@ -8,6 +8,12 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
+  checkLoginStatus() {
+    throw new Error('Method not implemented.');
+  }
   isLoggedIn = false;
   userRole: string | null = null;
   showNavbar = true;
@@ -27,8 +33,9 @@ export class AppComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const currentUrl = event.url;
-        this.showNavbar = !(currentUrl === '/login' || currentUrl === '/register');
+        const currentUrl = event.urlAfterRedirects;
+        // ซ่อน navbar ในหน้า login และ register
+        this.showNavbar = !(currentUrl.includes('/login') || currentUrl.includes('/register'));
       }
     });
   }

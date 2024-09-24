@@ -8,4 +8,83 @@
     padding: 10px;
     text-align: center;
   }
-  
+  /* Admin Sidebar Styling */
+/* Admin Sidebar Styling */
+#admin-sidebar {
+  background-color: #f8f9fa;
+  width: 250px;
+  height: 100vh; /* Ensure the sidebar takes the full height of the viewport */
+  position: fixed; /* Make it fixed on the left side */
+  top: 0;
+  left: 0;
+  border-right: 1px solid #e0e0e0;
+}
+
+#admin-sidebar .sidebar-header {
+  background-color: #007bff;
+}
+
+#admin-sidebar .nav-link {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#admin-sidebar .nav-link:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+#admin-sidebar .nav-link.text-danger {
+  color: #dc3545;
+}
+
+#admin-sidebar .nav-link.text-danger:hover {
+  background-color: #f8d7da; /* New hover background for logout */
+  color: #721c24; /* Darker red text on hover */
+}
+
+/* Content adjustment for admin */
+#content {
+  margin-left: 250px; /* Make sure content shifts right to accommodate sidebar */
+  padding: 20px;
+}
+
+
+/* User Navbar Styling */
+.navbar .nav-link {
+  font-size: 16px;
+  margin-right: 15px;
+}
+
+.navbar .nav-link.text-danger {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.navbar .nav-link.text-danger:hover {
+  color: #ff0000;
+}
+
+.navbar .navbar-nav {
+  margin-left: auto;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+  padding: 8px 15px;
+  font-weight: 500;
+}
+
+.navbar .navbar-toggler {
+  border-color: #007bff;
+}
+
+/* Add some spacing between items */
+.navbar .nav-item {
+  margin-left: 10px;
+}
+
+/* Styling for the user cart, orders, and logout aligned to the right */
+.navbar-nav.ml-auto .nav-item .nav-link {
+  text-align: right;
+}
