@@ -41,4 +41,7 @@ export class CartService {
   checkStock(productId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/check-stock/${productId}`);
   }
+  clearCart(userId: number): Observable<any> {
+    return this.http.delete(`http://localhost:3000/api/cart/clear/${userId}`);
+  }
 }

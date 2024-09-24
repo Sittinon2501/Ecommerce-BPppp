@@ -1,30 +1,28 @@
-<div class="container mt-5">
-  <h2 class="text-center mb-4">My Orders</h2>
-
-  <div *ngIf="orders.length > 0; else noOrders">
-    <div *ngFor="let order of orders" class="card mb-3">
-      <div class="card-header">
-        Order ID: {{ order.OrderId }} - Status: {{ order.Status }}
-      </div>
-      <div class="card-body">
-        <div *ngFor="let item of order.OrderItems" class="row mb-3">
-          <div class="col-md-2">
-            <img [src]="'http://localhost:3000' + item.ImageUrl" alt="Product Image" class="img-thumbnail" />
-          </div>
-          <div class="col-md-4">
-            <h5>{{ item.ProductName }}</h5>
-            <p>Quantity: {{ item.Quantity }}</p>
-            <p>Price: {{ item.Price | number: '1.2-2' }} THB</p>
-          </div>
-        </div>
-        <h5>Total: {{ order.TotalAmount | number: '1.2-2' }} THB</h5>
-      </div>
-    </div>
-  </div>
-
-  <ng-template #noOrders>
-    <div class="text-center mt-5">
-      <h4>You have no orders yet.</h4>
-    </div>
-  </ng-template>
+<div class="container mt-4">
+  <h2>Orders</h2>
+  
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Status</th>
+        <th>Order Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>
+          <img [src]="'http://localhost:3000' + order.ImageUrl" alt="Product Image" width="50" *ngIf="order.ImageUrl">
+        </td>
+        <td>{{ order.ProductName }}</td>
+        <td>{{ order.Quantity }}</td>
+        <td>{{ (order.Price * order.Quantity) | number:'1.2-2' }} THB</td>
+        <td>{{ order.Status }}</td>
+        <td>{{ order.OrderDate | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

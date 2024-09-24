@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { isPlatformBrowser } from '@angular/common';
-import { jwtDecode } from 'jwt-decode';
+import { ActivatedRoute } from '@angular/router';
 import { UserOrderService } from '../../services/order.service';
 
 @Component({
@@ -14,31 +13,25 @@ export class UserOrderComponent implements OnInit {
 
   constructor(
     private userOrderService: UserOrderService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.loadUserOrders();
-  }
-
-  loadUserOrders(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const decoded: any = jwtDecode(token);
-        const userId = decoded.id;
-
-        this.userOrderService.getUserOrders(userId).subscribe(
-          (data) => {
-            this.orders = data;
-          },
-          (error) => {
-            console.error('Error loading orders:', error);
-          }
-        );
-      } else {
-        console.error('No token found');
-      }
+    const userId = localStorage.getItem('userId');  // ดึง userId จาก localStorage
+    if (userId) {
+      this.loadOrders(+userId);  // ส่ง userId เพื่อดึงคำสั่งซื้อ
     }
+  }
+  loadOrders(userId: number): void {
+    console.log('Loading orders for userId:', userId);  // เพิ่ม log เพื่อดู userId ที่ถูกส่งไป API
+    this.userOrderService.getUserOrders(userId).subscribe({
+      next: (data) => {
+        this.orders = data;
+        console.log('Orders loaded from API:', this.orders);  // Log ข้อมูลที่ดึงมาจาก API
+      },
+      error: (err) => {
+        console.error('Error loading user orders:', err);  // Log ข้อผิดพลาด
+      }
+    });
   }
 }

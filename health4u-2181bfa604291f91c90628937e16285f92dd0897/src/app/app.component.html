@@ -40,18 +40,23 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
+      <!-- Left aligned nav items (Products and Blogs) -->
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item" *ngIf="userRole !== 'Admin'">
           <a class="nav-link" routerLink="/products">Products</a>
         </li>
+        <li class="nav-item" *ngIf="userRole !== 'Admin'">
+          <a class="nav-link" routerLink="/blogs">Blogs</a>
+        </li>
+      </ul>
+
+      <!-- Right aligned nav items (Cart, Orders, and Logout) -->
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item" *ngIf="userRole !== 'Admin'">
           <a class="nav-link" routerLink="/cart">Cart</a>
         </li>
         <li class="nav-item" *ngIf="userRole !== 'Admin'">
           <a class="nav-link" routerLink="/orders">Orders</a>
-        </li>
-        <li class="nav-item" *ngIf="userRole !== 'Admin'">
-          <a class="nav-link" routerLink="/blogs">Blogs</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-danger font-weight-bold" (click)="logout()">Logout</a>

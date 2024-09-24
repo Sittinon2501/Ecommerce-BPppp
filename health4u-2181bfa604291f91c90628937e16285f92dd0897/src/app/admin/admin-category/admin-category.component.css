@@ -1,0 +1,88 @@
+/* Container Styling */
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form Styling */
+  form label {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  .form-control {
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  .form-control-file {
+    padding: 8px;
+  }
+  
+  /* Table Styling */
+  .table {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .table thead th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+  }
+  
+  .table img {
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .table img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+  
+  /* Button Styling */
+  .btn {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+  }
+  
+  .btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn:hover {
+    opacity: 0.85;
+  }
+  
+  .btn-block {
+    width: 100%;
+  }
+  
+  .mt-3 {
+    margin-top: 1rem !important;
+  }
+  
+  .mt-5 {
+    margin-top: 3rem !important;
+  }
+  
+  .ml-2 {
+    margin-left: 10px !important;
+  }
+  /* Table Header Styling */
+.table thead th {
+    background-color: #007bff; /* สีน้ำเงิน */
+    color: #fff; /* สีฟอนต์เป็นสีขาว */
+    font-weight: bold;
+}

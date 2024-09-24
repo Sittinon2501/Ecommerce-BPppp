@@ -162,6 +162,19 @@ exports.checkout = async (req, res) => {
 };
 
 
+// ฟังก์ชันเพื่อลบสินค้าจากตะกร้าของผู้ใช้
+exports.clearCart = async (req, res) => {
+  const userId = req.params.userId; // รับ userId จาก request
+  try {
+    const pool = await poolPromise;
+    await pool.request()
+      .input('UserId', userId)
+      .query('DELETE FROM Cart WHERE UserId = @UserId'); // ลบสินค้าจาก Cart ที่มี userId ตรงกับผู้ใช้
+    res.status(200).json({ message: 'Cart cleared successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error clearing cart', error });
+  }
+};
 
 
 

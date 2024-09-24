@@ -1,0 +1,86 @@
+/* General Styling */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Table Styling */
+  .table {
+    margin-bottom: 0;
+    font-size: 16px;
+  }
+  
+  .table thead th {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .table tbody td {
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+  /* Image Thumbnail Styling */
+  .img-thumbnail {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .img-thumbnail:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+  
+  /* Dropdown and Status Styling */
+  .form-control {
+    border-radius: 5px;
+  }
+  
+  .table tbody td select {
+    background-color: #f8f9fa;
+    border-color: #ddd;
+    padding: 5px;
+  }
+  
+  .table tbody td select:hover,
+  .table tbody td select:focus {
+    background-color: #fff;
+    border-color: #007bff;
+  }
+  
+  .table tbody td span {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .status-pending {
+    background-color: #ffc107;
+  }
+  
+  .status-processing {
+    background-color: #17a2b8;
+  }
+  
+  .status-shipped {
+    background-color: #007bff;
+  }
+  
+  .status-delivered {
+    background-color: #28a745;
+  }
+  
+  .status-cancelled {
+    background-color: #dc3545;
+  }
+  
+  /* Responsive Table */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
