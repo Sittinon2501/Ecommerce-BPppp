@@ -2,23 +2,24 @@
 #admin-sidebar {
   background-color: #f8f9fa;
   width: 250px;
-  height: 100vh;
-  /* Ensure the sidebar takes the full height of the viewport */
-  position: fixed;
-  /* Make it fixed on the left side */
+  height: 100vh; /* Ensure the sidebar takes the full height of the viewport */
+  position: fixed; /* Make it fixed on the left side */
   top: 0;
   left: 0;
   border-right: 1px solid #e0e0e0;
+  z-index: 1000; /* Ensure sidebar stays on top */
 }
 
 #admin-sidebar .sidebar-header {
   background-color: #007bff;
+  text-align: center;
 }
 
 #admin-sidebar .nav-link {
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #admin-sidebar .nav-link:hover {
@@ -31,23 +32,37 @@
 }
 
 #admin-sidebar .nav-link.text-danger:hover {
-  background-color: #f8d7da;
-  /* New hover background for logout */
-  color: #721c24;
-  /* Darker red text on hover */
+  background-color: #f8d7da; /* New hover background for logout */
+  color: #721c24; /* Darker red text on hover */
 }
 
 /* Content adjustment for admin */
 #content {
-  margin-left: 250px;
-  /* Make sure content shifts right to accommodate sidebar */
+  margin-left: 250px; /* Make sure content shifts right to accommodate sidebar */
   padding: 20px;
 }
 
 /* User Navbar Styling */
-.navbar .nav-link {
+.navbar {
   font-size: 16px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  position: sticky;
+  top: 0; /* This will make the navbar fixed at the top when scrolling */
+  z-index: 1000; /* Ensure navbar stays above other elements */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for better visibility */
+}
+
+.navbar .nav-link {
+  color: #343a40;
   margin-right: 15px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1); /* Subtle background color on hover */
+  border-radius: 5px;
 }
 
 .navbar .nav-link.text-danger {
@@ -75,105 +90,22 @@
 
 /* Products and Blogs on the left, Cart, Orders, Logout on the right */
 .navbar .navbar-nav.mr-auto {
-  margin-right: auto;
-  /* Ensure Products and Blogs stay on the left */
+  margin-right: auto; /* Ensure Products and Blogs stay on the left */
 }
 
 .navbar .navbar-nav.ml-auto {
-  margin-left: auto;
-  /* Ensure Cart, Orders, and Logout stay on the right */
+  margin-left: auto; /* Ensure Cart, Orders, and Logout stay on the right */
 }
 
 /* Container height styling */
 .container {
-  padding-top: 70px;
-  /* เพิ่มระยะห่างด้านบนเพื่อให้ไม่ถูก navbar ทับ */
+  min-height: 80vh; /* Minimum height for content */
 }
 
+/* Footer Styling */
 footer {
   background-color: #f8f9fa;
   padding: 10px;
   text-align: center;
-}
-
-/* General Navbar Styling */
-.navbar {
-  background-color: #f8f9fa;
-  /* พื้นหลังสีขาวอ่อน */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* เพิ่มเงาใต้ navbar */
-  position: fixed;
-  /* ทำให้ navbar ยึดติดกับด้านบน */
-  top: 0;
-  width: 100%;
-  /* ทำให้ navbar ครอบคลุมเต็มความกว้างของหน้าจอ */
-  z-index: 1000;
-  /* ทำให้ navbar อยู่ข้างบนสุดของเลเยอร์ */
-}
-
-.navbar .navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #007bff;
-  /* เปลี่ยนสีแบรนด์ให้เป็นสีน้ำเงิน */
-  padding-left: 20px;
-  /* เพิ่มพื้นที่ด้านซ้ายเพื่อขยับออกมา */
-}
-
-
-.navbar .nav-link {
-  color: #343a40;
-  /* สีข้อความ */
-  font-weight: 500;
-  transition: color 0.3s ease;
-  /* เอฟเฟกต์เมื่อมีการ hover */
-}
-
-.navbar .nav-link:hover {
-  color: #007bff;
-  /* เปลี่ยนสีเป็นน้ำเงินเมื่อ hover */
-}
-
-.navbar .nav-link.active {
-  color: #0056b3;
-  /* สีของลิงก์เมื่อ active */
-}
-
-.navbar .nav-item {
-  margin-left: 15px;
-}
-
-/* Mobile View (Toggler) */
-.navbar-toggler {
-  border: none;
-}
-
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 123, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
-.collapse.navbar-collapse {
-  justify-content: space-between;
-}
-
-/* Right Aligned Nav Items */
-.navbar-nav.ml-auto .nav-link {
-  font-weight: bold;
-}
-
-.navbar-nav.ml-auto .nav-link.text-danger {
-  color: #dc3545;
-}
-
-/* Footer */
-app-footer {
-  background-color: #f8f9fa;
-  padding: 20px 0;
-  text-align: center;
-  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-  /* เพิ่มเงาที่ด้านบนของ footer */
-}
-/* ปรับให้ navbar ไม่ซ้อนกับเนื้อหาเมื่อเลื่อน */
-.navbar + .container {
-  margin-top: 70px; /* เพิ่มระยะห่างจาก navbar fixed */
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for footer */
 }

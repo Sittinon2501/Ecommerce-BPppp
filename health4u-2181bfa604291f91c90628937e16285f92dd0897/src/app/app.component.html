@@ -97,6 +97,8 @@
     <router-outlet></router-outlet>
   </div>
 
-  <!-- Footer component ที่จะถูกแสดงเฉพาะเมื่อ userRole ไม่ใช่ 'Admin' -->
-  <app-footer *ngIf="userRole !== 'Admin'"></app-footer>
+
+  <!-- Footer component ที่จะถูกแสดงเฉพาะเมื่อ userRole ไม่ใช่ 'Admin' และไม่ใช่ login หรือ register -->
+  <app-footer *ngIf="showNavbar && userRole !== 'Admin'"></app-footer>
+
 </ng-template>
