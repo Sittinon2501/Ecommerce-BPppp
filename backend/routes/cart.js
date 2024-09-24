@@ -16,6 +16,7 @@ router.get('/:userId', getCartItems);
 router.delete('/:id', removeCartItem);
 router.put('/:id', updateCartItem);
 router.get('/check-stock/:productId', checkStock);
+
 // Checkout route
 router.post('/checkout', checkout); // Ensure checkout is correctly assigned
 

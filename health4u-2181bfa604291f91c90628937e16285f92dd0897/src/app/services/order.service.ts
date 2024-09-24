@@ -21,4 +21,8 @@ export class UserOrderService {
   updateOrderStatus(orderId: number, status: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/admin/${orderId}/status`, { status });
   }
+   // ฟังก์ชันสำหรับยกเลิกคำสั่งซื้อ
+   cancelOrder(orderId: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/cancel/${orderId}`, { status: 'Cancelled' });
+  }
 }

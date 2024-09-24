@@ -1,13 +1,10 @@
-const { poolPromise } = require('../db');
-
+const { poolPromise } = require("../db");
 
 exports.getUserOrders = async (req, res) => {
   const userId = req.params.userId;
   try {
     const pool = await poolPromise;
-    const result = await pool.request()
-      .input('UserId', userId)
-      .query(`
+    const result = await pool.request().input("UserId", userId).query(`
         SELECT Orders.OrderId, Orders.TotalAmount, Orders.OrderDate, Orders.Status, 
                OrderItems.Quantity, Products.ProductName, Products.Price, Products.ImageUrl 
         FROM Orders
@@ -15,9 +12,13 @@ exports.getUserOrders = async (req, res) => {
         JOIN Products ON OrderItems.ProductId = Products.ProductId
         WHERE Orders.UserId = @UserId
       `);
+
+    // Log ผลลัพธ์เพื่อตรวจสอบว่ามี OrderDate หรือไม่
+    console.log(result.recordset); // ดูผลลัพธ์จากฐานข้อมูล
+
     res.status(200).json(result.recordset);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching user orders', error });
+    res.status(500).json({ message: "Error fetching user orders", error });
   }
 };
 
@@ -35,10 +36,9 @@ exports.getAllOrders = async (req, res) => {
 
     res.status(200).json(result.recordset);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching orders', error });
+    res.status(500).json({ message: "Error fetching orders", error });
   }
 };
-
 
 // อัปเดตสถานะคำสั่งซื้อ
 exports.updateOrderStatus = async (req, res) => {
@@ -47,13 +47,30 @@ exports.updateOrderStatus = async (req, res) => {
 
   try {
     const pool = await poolPromise;
+    await pool
+      .request()
+      .input("OrderId", orderId)
+      .input("Status", status)
+      .query("UPDATE Orders SET Status = @Status WHERE OrderId = @OrderId");
+
+    res.json({ message: "Order status updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating order status", error });
+  }
+};
+// ยกเลิกคำสั่งซื้อ
+exports.cancelOrder = async (req, res) => {
+  const { orderId } = req.params;
+
+  try {
+    const pool = await poolPromise;
     await pool.request()
       .input('OrderId', orderId)
-      .input('Status', status)
+      .input('Status', 'Cancelled')  // เปลี่ยนสถานะเป็น Cancelled
       .query('UPDATE Orders SET Status = @Status WHERE OrderId = @OrderId');
     
-    res.json({ message: 'Order status updated successfully' });
+    res.json({ message: 'Order cancelled successfully' });
   } catch (error) {
-    res.status(500).json({ message: 'Error updating order status', error });
+    res.status(500).json({ message: 'Error cancelling order', error });
   }
 };
