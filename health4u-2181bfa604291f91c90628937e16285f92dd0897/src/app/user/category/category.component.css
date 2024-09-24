@@ -7,38 +7,39 @@
 }
 
 .carousel-item img {
-  height: 400px; /* ปรับความสูงของรูปภาพ */
+  height: 400px; /* Adjust image height */
   object-fit: cover;
 }
 
 .carousel-caption {
-  background: rgba(0, 0, 0, 0.5); /* เพิ่มพื้นหลังโปร่งใส */
+  background: rgba(0, 0, 0, 0.5); /* Transparent background */
   padding: 15px;
   border-radius: 5px;
+  color: white; /* Change font color to white */
 }
 
 .carousel-control-prev-icon, 
 .carousel-control-next-icon {
-  background-color: #007bff; /* เปลี่ยนสีของไอคอน */
-  border-radius: 50%; /* ทำให้ไอคอนเป็นวงกลม */
+  background-color: #007bff; /* Change icon color */
+  border-radius: 50%; /* Make icons circular */
   padding: 10px;
 }
 
 /* Category Card Styling */
 .card {
-  border: none; /* เอาเส้นขอบออก */
-  transition: transform 0.3s ease; /* เพิ่มเอฟเฟกต์ hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้ card */
+  border: none; /* Remove border */
+  transition: transform 0.3s ease; /* Hover effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to card */
 }
 
 .card:hover {
-  transform: scale(1.05); /* ขยายเมื่อ hover */
+  transform: scale(1.05); /* Scale on hover */
 }
 
 .card-img-top {
-  border-radius: 10px 10px 0 0; /* ทำมุมโค้ง */
-  height: 200px; /* กำหนดความสูงที่คงที่ */
-  object-fit: cover; /* ให้รูปภาพเติมเต็มพื้นที่โดยไม่เสียสัดส่วน */
+  border-radius: 10px 10px 0 0; /* Rounded corners */
+  height: 200px; /* Fixed height */
+  object-fit: cover; /* Maintain aspect ratio */
 }
 
 .card-body {
