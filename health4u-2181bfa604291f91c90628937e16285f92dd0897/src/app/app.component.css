@@ -1,11 +1,111 @@
-/* ตัวอย่าง CSS สำหรับจัดการ Layout */
+/* Admin Sidebar Styling */
+#admin-sidebar {
+  background-color: #f8f9fa;
+  width: 250px;
+  height: 100vh; /* Ensure the sidebar takes the full height of the viewport */
+  position: fixed; /* Make it fixed on the left side */
+  top: 0;
+  left: 0;
+  border-right: 1px solid #e0e0e0;
+  z-index: 1000; /* Ensure sidebar stays on top */
+}
+
+#admin-sidebar .sidebar-header {
+  background-color: #007bff;
+  text-align: center;
+}
+
+#admin-sidebar .nav-link {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#admin-sidebar .nav-link:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+#admin-sidebar .nav-link.text-danger {
+  color: #dc3545;
+}
+
+#admin-sidebar .nav-link.text-danger:hover {
+  background-color: #f8d7da; /* New hover background for logout */
+  color: #721c24; /* Darker red text on hover */
+}
+
+/* Content adjustment for admin */
+#content {
+  margin-left: 250px; /* Make sure content shifts right to accommodate sidebar */
+  padding: 20px;
+}
+
+/* User Navbar Styling */
+.navbar {
+  font-size: 16px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  position: sticky;
+  top: 0; /* This will make the navbar fixed at the top when scrolling */
+  z-index: 1000; /* Ensure navbar stays above other elements */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for better visibility */
+}
+
+.navbar .nav-link {
+  color: #343a40;
+  margin-right: 15px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1); /* Subtle background color on hover */
+  border-radius: 5px;
+}
+
+.navbar .nav-link.text-danger {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.navbar .nav-link.text-danger:hover {
+  color: #ff0000;
+}
+
+/* Adjust spacing for items aligned left (mr-auto) and right (ml-auto) */
+.navbar-nav.ml-auto .nav-item .nav-link {
+  text-align: right;
+}
+
+.navbar-nav.mr-auto .nav-item .nav-link {
+  text-align: left;
+  margin-right: 15px;
+}
+
+.navbar .nav-item {
+  margin-left: 10px;
+}
+
+/* Products and Blogs on the left, Cart, Orders, Logout on the right */
+.navbar .navbar-nav.mr-auto {
+  margin-right: auto; /* Ensure Products and Blogs stay on the left */
+}
+
+.navbar .navbar-nav.ml-auto {
+  margin-left: auto; /* Ensure Cart, Orders, and Logout stay on the right */
+}
+
+/* Container height styling */
 .container {
-    min-height: 80vh; /* กำหนดความสูงขั้นต่ำของ container */
-  }
-  
-  footer {
-    background-color: #f8f9fa;
-    padding: 10px;
-    text-align: center;
-  }
-  
+  min-height: 80vh; /* Minimum height for content */
+}
+
+/* Footer Styling */
+footer {
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for footer */
+}

@@ -145,18 +145,31 @@ export class CartComponent implements OnInit {
       );
       return;
     }
-
+  
+    const token = localStorage.getItem('token');
+    if (!token) {
+      Swal.fire(
+        'Error',
+        'Please log in to proceed with checkout.',
+        'error'
+      );
+      return;
+    }
+  
+    const decoded: any = jwtDecode(token); // ดึง userId จาก token
+    const userId = decoded.id;
+  
     let outOfStockItems = [];
     let stockChecked = 0;
-
+  
     for (let item of this.selectedItems) {
       this.cartService.checkStock(item.ProductId).subscribe(
         (product) => {
           stockChecked++;
-          if (product.stock < item.Quantity) {
+          if (product.Stock < item.Quantity) {
             outOfStockItems.push(item);
           }
-
+  
           if (stockChecked === this.selectedItems.length) {
             if (outOfStockItems.length > 0) {
               Swal.fire(
@@ -168,8 +181,9 @@ export class CartComponent implements OnInit {
               const cartData = {
                 items: this.selectedItems,
                 total: this.totalAmount,
+                userId: userId, // เพิ่ม userId ใน cartData
               };
-
+  
               this.cartService.checkout(cartData).subscribe(
                 () => {
                   Swal.fire(
@@ -177,14 +191,14 @@ export class CartComponent implements OnInit {
                     'Checkout completed successfully',
                     'success'
                   );
-
+  
                   // ลบเฉพาะรายการที่ถูก checkout ออกจาก cartItems
                   this.cartItems = this.cartItems.filter(
-                    (item) => !this.selectedItems.includes(item) // เก็บรายการที่ยังไม่ได้เลือก
+                    (item) => !this.selectedItems.includes(item)
                   );
-
-                  this.selectedItems = []; // ล้างรายการที่เลือก
-                  this.calculateTotal(); // คำนวณราคาใหม่
+  
+                  this.selectedItems = [];
+                  this.calculateTotal();
                 },
                 (error) => {
                   console.error('Error during checkout:', error);
@@ -204,4 +218,4 @@ export class CartComponent implements OnInit {
       );
     }
   }
-}
+}  

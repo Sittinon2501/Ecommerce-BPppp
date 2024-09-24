@@ -1,0 +1,92 @@
+/* Fade-in and slide down animation */
+@keyframes fade-slide-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px); /* เริ่มจากข้างบน */
+    }
+    50% {
+      opacity: 0.5; /* เฟดช้าในช่วงแรก */
+      transform: translateY(-25px); /* เลื่อนลงครึ่งทาง */
+    }
+    100% {
+      opacity: 1; /* มองเห็นเต็มที่ */
+      transform: translateY(0); /* กลับมาที่ตำแหน่งปกติ */
+    }
+  }
+  
+  /* Apply the animation to the card */
+  .fade-slide-in {
+    animation: fade-slide-in 2s ease-in-out;
+  }
+  
+  /* Background for the entire page */
+  body {
+    background: linear-gradient(45deg, #8bc34a, #4caf50);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  
+  /* Styling for the login card */
+  .card {
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    width: 450px;
+  }
+  
+  /* Form input fields */
+  .form-control {
+    border-radius: 50px;
+    padding: 15px 20px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #4caf50;
+    box-shadow: none;
+    outline: none;
+  }
+  
+  /* Buttons */
+  button[type="submit"] {
+    border-radius: 50px;
+    background-color: #4caf50;
+    border: none;
+    padding: 15px 0;
+    font-size: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #388e3c;
+  }
+  
+  .nav-link {
+    font-size: 18px;
+    color: #4caf50;
+  }
+  
+  .nav-link:hover {
+    color: #388e3c;
+  }
+  
+  /* Heading */
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #4caf50;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  
+  /* Add some space below the button */
+  .mb-3 {
+    margin-bottom: 1.5rem;
+  }
+  

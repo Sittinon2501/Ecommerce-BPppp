@@ -10,7 +10,6 @@
         <th scope="col">Quantity</th>
         <th scope="col">Price</th>
         <th scope="col">Total</th>
-        <th scope="col">Status</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -24,7 +23,6 @@
         <td>{{ order.Quantity }}</td>
         <td>{{ order.Price | number: '1.2-2' }} THB</td>
         <td>{{ (order.Quantity * order.Price) | number: '1.2-2' }} THB</td>
-        <td>{{ order.Status }}</td>
         <td>
           <select [(ngModel)]="order.Status" (change)="updateOrderStatus(order.OrderId, order.Status)">
             <option value="Pending">Pending</option>

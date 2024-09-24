@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-
 import { isPlatformBrowser } from '@angular/common';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import { UserOrderService } from '../../services/order.service';
+import Swal from 'sweetalert2';  // ใช้ SweetAlert เพื่อแสดงการยืนยันและผลลัพธ์
 
 @Component({
   selector: 'app-user-order',
@@ -30,7 +30,10 @@ export class UserOrderComponent implements OnInit {
 
         this.userOrderService.getUserOrders(userId).subscribe(
           (data) => {
-            this.orders = data;
+            this.orders = data.map((order: { OrderDate: string | number | Date; }) => ({
+              ...order,
+              formattedDate: new Date(order.OrderDate).toLocaleDateString()
+            }));
           },
           (error) => {
             console.error('Error loading orders:', error);
@@ -40,5 +43,30 @@ export class UserOrderComponent implements OnInit {
         console.error('No token found');
       }
     }
+  }
+
+  // ฟังก์ชันสำหรับยกเลิกคำสั่งซื้อ
+  cancelOrder(orderId: number): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you really want to cancel this order?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, cancel it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userOrderService.cancelOrder(orderId).subscribe(
+          () => {
+            Swal.fire('Cancelled!', 'Your order has been cancelled.', 'success');
+            this.loadUserOrders();  // รีเฟรชรายการคำสั่งซื้อหลังจากยกเลิกสำเร็จ
+          },
+          (error) => {
+            Swal.fire('Error', 'Could not cancel the order', 'error');
+            console.error('Error cancelling order:', error);
+          }
+        );
+      }
+    });
   }
 }
