@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
-import { CategoryService } from '../../services/category.service'; // Import CategoryService
+import { CategoryService } from '../../services/category.service'; 
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2'; // Import SweetAlert2
+import Swal from 'sweetalert2'; 
 import { Product } from '../../models/product';
-import { Category } from '../../models/category'; // Import Category model
+import { Category } from '../../models/category'; 
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -14,17 +13,17 @@ import { ProductService } from '../../services/product.service';
 })
 export class AdminProductComponent implements OnInit {
   products: Product[] = [];
-  categories: Category[] = []; // Array to hold categories
+  categories: Category[] = []; 
   product = {
     name: '',
     description: '',
     price: 0,
     stock: 0,
-    categoryId: 0, // Add categoryId
+    categoryId: 0, 
   };
   selectedFile: File | null = null;
-  isEditing = false; // Flag for editing mode
-  editingProductId: number | null = null; // Store the product being edited
+  isEditing = false; 
+  editingProductId: number | null = null; 
 
   constructor(
     private productService: ProductService,
@@ -33,8 +32,8 @@ export class AdminProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchProducts(); // Load all products on initialization
-    this.loadCategories(); // Load categories on initialization
+    this.fetchProducts(); 
+    this.loadCategories(); 
   }
 
   // Fetch all products
@@ -45,12 +44,12 @@ export class AdminProductComponent implements OnInit {
           if (product.imageUrl && product.imageUrl.trim() !== '') {
             product.imageUrl = `http://localhost:3000${product.imageUrl}`;
           } else {
-            product.imageUrl = 'assets/default-image.jpg'; // Default image
+            product.imageUrl = 'assets/default-image.jpg'; 
           }
-          product.description = product.description || ''; // Default to empty string if undefined
+          product.description = product.description || ''; 
           return product;
         });
-        console.log('Products:', this.products); // Debug
+        console.log('Products:', this.products); 
       },
       error: (err) => {
         console.error('Error fetching products:', err);
@@ -85,7 +84,7 @@ export class AdminProductComponent implements OnInit {
   // Add or Update product
   onSubmit(): void {
     const formData = new FormData();
-    formData.append('ProductName', this.product.name); // ให้ตรงกับที่ Controller คาดหวัง
+    formData.append('ProductName', this.product.name);
     formData.append('Description', this.product.description || '');
     formData.append('Price', this.product.price.toString());
     formData.append('Stock', this.product.stock.toString());
@@ -134,22 +133,23 @@ export class AdminProductComponent implements OnInit {
     }
   }
 
-  // Edit product
-  editProduct(product: Product): void {
-    Swal.fire({
-      title: 'Edit Product',
-      text: 'Make sure to fill all fields.',
-    });
-    this.isEditing = true;
-    this.editingProductId = product.ProductId;
-    this.product = {
-      name: product.name,
-      description: product.description || '',
-      price: product.price,
-      stock: product.stock,
-      categoryId: product.CategoryId, // Pre-fill categoryId
-    };
-  }
+ // Edit product
+editProduct(product: Product): void {
+  this.isEditing = true; 
+  this.editingProductId = product.ProductId; 
+
+  // Pre-fill the form with the existing product details
+  this.product = {
+    name: product.ProductName,       
+    description: product.Description || '',  
+    price: parseFloat(product.Price.toString()),   // แปลงเป็น number
+    stock: parseInt(product.Stock.toString(), 10), // แปลงเป็น number
+    categoryId: product.CategoryId   
+  };
+
+  this.selectedFile = null; 
+}
+
 
   // Delete product
   deleteProduct(productId: number): void {
@@ -166,7 +166,7 @@ export class AdminProductComponent implements OnInit {
         this.productService.deleteProduct(productId).subscribe({
           next: () => {
             Swal.fire('Deleted!', 'Product has been deleted.', 'success');
-            this.fetchProducts(); // Reload product list after deletion
+            this.fetchProducts(); 
           },
           error: (err) => {
             console.error('Error deleting product:', err);
@@ -183,7 +183,7 @@ export class AdminProductComponent implements OnInit {
       description: '',
       price: 0,
       stock: 0,
-      categoryId: 0, // Reset categoryId
+      categoryId: 0, 
     };
     this.selectedFile = null;
     this.isEditing = false;
