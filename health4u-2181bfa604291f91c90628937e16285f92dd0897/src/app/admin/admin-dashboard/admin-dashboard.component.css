@@ -1,9 +1,29 @@
-/* ตัวอย่าง CSS สำหรับ Admin Dashboard */
 .container {
     max-width: 1200px;
-  }
-  
-  .btn-block {
+}
+
+.chart-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    border: 1px solid #ccc; /* กรอบ */
+    border-radius: 8px; /* มุมมน */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* เงา */
+    transition: transform 0.2s, box-shadow 0.2s; /* เอฟเฟกต์ transition */
+    padding: 20px; /* ช่องว่างภายใน */
+    background-color: white; /* สีพื้นหลัง */
+    flex: 1; /* ทำให้ chart-container ขยายเต็มที่ */
+    margin: 0 10px; /* ช่องว่างระหว่าง chart-container */
+}
+
+.chart-container:hover {
+    transform: scale(1.02); /* ขยายขนาดเมื่อ hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* เงาที่เข้มขึ้นเมื่อ hover */
+}
+
+.btn-block {
     margin-bottom: 10px;
-  }
-  
+}
