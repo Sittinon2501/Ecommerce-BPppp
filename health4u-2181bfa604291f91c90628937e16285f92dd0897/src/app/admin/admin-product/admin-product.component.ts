@@ -14,12 +14,14 @@ import { ProductService } from '../../services/product.service';
 export class AdminProductComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = []; 
+
   product = {
     name: '',
     description: '',
     price: 0,
     stock: 0,
     categoryId: 0, 
+    imageUrl: '' // ต้องแน่ใจว่า imageUrl เป็น string
   };
   selectedFile: File | null = null;
   isEditing = false; 
@@ -90,31 +92,30 @@ export class AdminProductComponent implements OnInit {
     formData.append('Stock', this.product.stock.toString());
     formData.append('CategoryId', this.product.categoryId.toString());
 
+    // Check if a new file is selected, otherwise use the existing image
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
+    } else if (this.product.imageUrl) {
+      formData.append('imageUrl', this.product.imageUrl); // Send existing image URL as string
     }
 
     if (this.isEditing && this.editingProductId !== null) {
-      // Update product
-      this.productService
-        .updateProduct(this.editingProductId, formData)
-        .subscribe({
-          next: () => {
-            Swal.fire('Updated!', 'Product updated successfully.', 'success');
-            this.resetForm();
-            this.fetchProducts();
-          },
-          error: (err) => {
-            console.error('Error updating product:', err);
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: `Error updating product: ${err.message || 'Unknown error'}`,
-            });
-          },
-        });
+      this.productService.updateProduct(this.editingProductId, formData).subscribe({
+        next: () => {
+          Swal.fire('Updated!', 'Product updated successfully.', 'success');
+          this.resetForm();
+          this.fetchProducts();
+        },
+        error: (err) => {
+          console.error('Error updating product:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `Error updating product: ${err.message || 'Unknown error'}`,
+          });
+        },
+      });
     } else {
-      // Add product
       this.productService.addProduct(formData).subscribe({
         next: () => {
           Swal.fire('Added!', 'Product added successfully!', 'success');
@@ -133,23 +134,23 @@ export class AdminProductComponent implements OnInit {
     }
   }
 
- // Edit product
-editProduct(product: Product): void {
-  this.isEditing = true; 
-  this.editingProductId = product.ProductId; 
+  // Edit product
+  editProduct(product: Product): void {
+    this.isEditing = true; 
+    this.editingProductId = product.ProductId; 
 
-  // Pre-fill the form with the existing product details
-  this.product = {
-    name: product.ProductName,       
-    description: product.Description || '',  
-    price: parseFloat(product.Price.toString()),   // แปลงเป็น number
-    stock: parseInt(product.Stock.toString(), 10), // แปลงเป็น number
-    categoryId: product.CategoryId   
-  };
+    // Pre-fill the form with the existing product details, including image URL
+    this.product = {
+      name: product.ProductName,       
+      description: product.Description || '',  
+      price: parseFloat(product.Price.toString()),  
+      stock: parseInt(product.Stock.toString(), 10),  
+      categoryId: product.CategoryId,
+      imageUrl: typeof product.ImageUrl === 'string' ? product.ImageUrl : ''
+    };
 
-  this.selectedFile = null; 
-}
-
+    this.selectedFile = null; 
+  }
 
   // Delete product
   deleteProduct(productId: number): void {
@@ -184,6 +185,7 @@ editProduct(product: Product): void {
       price: 0,
       stock: 0,
       categoryId: 0, 
+      imageUrl: '' // Reset image URL
     };
     this.selectedFile = null;
     this.isEditing = false;
