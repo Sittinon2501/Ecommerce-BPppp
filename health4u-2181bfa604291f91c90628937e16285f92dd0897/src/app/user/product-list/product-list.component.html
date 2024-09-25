@@ -4,39 +4,35 @@
   <!-- Search Bar -->
   <div class="row mb-4">
     <div class="col-md-12">
-      <input type="text" class="form-control" placeholder="Search products..." [(ngModel)]="searchTerm" (input)="onSearch()">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search products..." [(ngModel)]="searchTerm" (input)="onSearch()">
+        <button class="btn btn-outline-secondary" type="button">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Product Grid -->
-  <div class="container mt-4">
-  <h2>Product List</h2>
-
   <div *ngIf="filteredProducts.length > 0; else noProducts">
     <div class="row">
       <div class="col-md-3 mb-4" *ngFor="let product of filteredProducts">
         <div class="card">
-          <!-- รูปภาพของสินค้า -->
           <img [src]="'http://localhost:3000' + product.ImageUrl" class="card-img-top product-image" alt="{{ product.ProductName }}">
           <div class="card-body">
             <h5 class="card-title">{{ product.ProductName }}</h5>
             <p class="card-text">
-              <strong>Price:</strong> {{ product.Price | number:'1.2-2' }} THB
+              <strong><i class="bi bi-cash"></i> Price:</strong> {{ product.Price | number:'1.2-2' }} THB
             </p>
-            <a [routerLink]="['/products', product.ProductId]" class="btn btn-primary">View Details</a>
+            <a [routerLink]="['/products', product.ProductId]" class="btn btn-primary"> 
+              <i class="bi bi-eye"></i> View Details
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <ng-template #noProducts>
-    <p>No products available.</p>
-  </ng-template>
-</div>
-
-
-  <!-- No Products Available Message -->
   <ng-template #noProducts>
     <p>No products available.</p>
   </ng-template>
