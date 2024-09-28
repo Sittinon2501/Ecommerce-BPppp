@@ -11,13 +11,17 @@
         <input type="date" [(ngModel)]="endDate" class="form-control">
       </div>
       <div class="col-md-2 d-flex align-items-end">
-        <button class="btn btn-primary" (click)="loadTopSellingProducts(); loadLowSellingProducts(); loadRevenueReport();">Load Reports</button>
+        <button class="btn btn-primary icon-btn" (click)="loadTopSellingProducts(); loadLowSellingProducts(); loadRevenueReport();">
+          <i class="bi bi-box-arrow-in-right"></i> Load Reports
+        </button>
       </div>
     </div>
   
     <!-- รายงานสินค้าขายดี -->
     <h3>Top Selling Products</h3>
-    <button class="btn btn-success mb-2" (click)="exportToExcel('top-selling')">Export Top Selling Products to Excel</button>
+    <button class="btn btn-success icon-btn mb-2" (click)="exportToExcel('top-selling')">
+      <i class="bi bi-file-earmark-excel"></i> Export Top Selling Products to Excel
+    </button>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -37,7 +41,9 @@
   
     <!-- รายงานสินค้าที่ขายไม่ดี -->
     <h3>Low Selling Products</h3>
-    <button class="btn btn-success mb-2" (click)="exportToExcel('low-selling')">Export Low Selling Products to Excel</button>
+    <button class="btn btn-success icon-btn mb-2" (click)="exportToExcel('low-selling')">
+      <i class="bi bi-file-earmark-excel"></i> Export Low Selling Products to Excel
+    </button>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -57,7 +63,9 @@
   
     <!-- รายงานรายได้ -->
     <h3>Revenue Report</h3>
-    <button class="btn btn-success mb-2" (click)="exportToExcel('revenue')">Export Revenue Report to Excel</button>
+    <button class="btn btn-success icon-btn mb-2" (click)="exportToExcel('revenue')">
+      <i class="bi bi-file-earmark-excel"></i> Export Revenue Report to Excel
+    </button>
     <table class="table table-striped">
       <thead>
         <tr>
