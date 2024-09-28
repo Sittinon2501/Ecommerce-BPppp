@@ -1,15 +1,17 @@
 // controllers/chartController.js
 const { poolPromise } = require("../db");
 
-// Sales Overview
+// Sales Overview by Month
 exports.getSalesOverview = async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query(`
-      SELECT OrderDate, SUM(TotalAmount) as TotalSales
+      SELECT 
+        FORMAT(OrderDate, 'yyyy-MM') as OrderMonth, 
+        SUM(TotalAmount) as TotalSales
       FROM Orders
-      GROUP BY OrderDate
-      ORDER BY OrderDate
+      GROUP BY FORMAT(OrderDate, 'yyyy-MM')
+      ORDER BY FORMAT(OrderDate, 'yyyy-MM')
     `);
     res.status(200).json(result.recordset);
   } catch (error) {

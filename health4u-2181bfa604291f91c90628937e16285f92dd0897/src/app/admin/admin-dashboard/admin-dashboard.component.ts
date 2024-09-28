@@ -44,16 +44,17 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
   loadSalesOverview() {
     this.dashboardService.getSalesOverview().subscribe((data) => {
       new Chart(this.salesChartRef.nativeElement, {
-        type: 'line',
+        type: 'line', // ใช้ line chart แล้วเติมพื้นที่ใต้เส้น
         data: {
-          labels: data.map((item: any) => item.OrderDate),
+          labels: data.map((item: any) => item.OrderMonth), // แสดงเดือน
           datasets: [
             {
-              label: 'Sales',
+              label: 'Monthly Sales',
               data: data.map((item: any) => item.TotalSales),
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)', // เติมพื้นที่ใต้เส้น
               borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1,
+              borderWidth: 2,
+              fill: true, // เติมพื้นที่ใต้เส้น
             },
           ],
         },
@@ -67,11 +68,12 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
                   size: 12,
                   weight: 'bold',
                 },
-                maxRotation: 30,
-                minRotation: 30,
+                maxRotation: 0, // ไม่ให้เอียงตัวอักษร
+                minRotation: 0,
               },
             },
             y: {
+              beginAtZero: true, // ย้าย beginAtZero ไปที่นี่
               ticks: {
                 color: '#333',
                 font: {
@@ -79,6 +81,14 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit {
                   weight: 'bold',
                 },
               },
+            },
+          },
+          plugins: {
+            legend: {
+              display: true, // แสดง label 'Monthly Sales'
+            },
+            tooltip: {
+              enabled: true, // แสดง tooltip เมื่อ hover
             },
           },
           layout: {

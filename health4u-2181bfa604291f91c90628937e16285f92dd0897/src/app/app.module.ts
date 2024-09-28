@@ -35,6 +35,7 @@ import { BlogsComponent } from './shared/blogs/blogs.component';
 import { CartComponent } from './user/cart/cart.component';
 import { UserOrderComponent } from './user/user-order/user-order.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { OrderHistoryComponent } from './user/order-history/order-history.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     BlogsComponent,
     CartComponent,
     UserOrderComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     BrowserModule,

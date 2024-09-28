@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { UserOrderService } from '../../services/order.service';
 import Swal from 'sweetalert2';  // ใช้ SweetAlert เพื่อแสดงการยืนยันและผลลัพธ์
 
@@ -30,10 +30,15 @@ export class UserOrderComponent implements OnInit {
 
         this.userOrderService.getUserOrders(userId).subscribe(
           (data) => {
-            this.orders = data.map((order: { OrderDate: string | number | Date; }) => ({
-              ...order,
-              formattedDate: new Date(order.OrderDate).toLocaleDateString()
-            }));
+            // กรองคำสั่งซื้อที่ไม่ใช่ 'Delivered Successfully' หรือ 'Cancelled'
+            this.orders = data
+              .filter((order: { Status: string }) => 
+                order.Status !== 'Delivered Successfully' && order.Status !== 'Cancelled'
+              )
+              .map((order: { OrderDate: string | number | Date }) => ({
+                ...order,
+                formattedDate: new Date(order.OrderDate).toLocaleDateString(),
+              }));
           },
           (error) => {
             console.error('Error loading orders:', error);
