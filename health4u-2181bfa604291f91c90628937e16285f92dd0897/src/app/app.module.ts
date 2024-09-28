@@ -5,6 +5,11 @@ import { HttpClientModule } from '@angular/common/http'; // เชื่อม�
 import { AppRoutingModule } from './app-routing.module'; // ใช้ AppRoutingModule สำหรับ routing
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core'; // สำหรับใช้กับ Date Picker แบบ native
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 // นำเข้า Components ต่าง ๆ
 import { AppComponent } from './app.component';
@@ -29,6 +34,8 @@ import { AdminCategoryComponent } from './admin/admin-category/admin-category.co
 import { BlogsComponent } from './shared/blogs/blogs.component';
 import { CartComponent } from './user/cart/cart.component';
 import { UserOrderComponent } from './user/user-order/user-order.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { OrderHistoryComponent } from './user/order-history/order-history.component';
 
 
 @NgModule({
@@ -50,6 +57,7 @@ import { UserOrderComponent } from './user/user-order/user-order.component';
     BlogsComponent,
     CartComponent,
     UserOrderComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,10 +66,16 @@ import { UserOrderComponent } from './user/user-order/user-order.component';
     AppRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
-    AdminGuard, // เพิ่ม AdminGuard ใน providers
+    AdminGuard,
+    provideAnimationsAsync(), // เพิ่ม AdminGuard ใน providers
   ],
   bootstrap: [AppComponent],
 })

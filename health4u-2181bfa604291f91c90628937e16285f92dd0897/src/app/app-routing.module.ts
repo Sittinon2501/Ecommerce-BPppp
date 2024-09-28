@@ -16,6 +16,7 @@ import { AdminGuard } from './guards/admin.guard'; // Ensure the guard is applie
 import { CartComponent } from './user/cart/cart.component';
 import { UserOrderComponent } from './user/user-order/user-order.component';
 import { AuthGuard } from './guards/auth.guard';
+import { OrderHistoryComponent } from './user/order-history/order-history.component';
 
 // Define all routes here
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'blogs', component: BlogsComponent,canActivate: [AuthGuard] },
   { path: 'cart', component: CartComponent,canActivate: [AuthGuard] },
   { path: 'orders', component: UserOrderComponent,canActivate: [AuthGuard] },
+  {path : 'order-history', component: OrderHistoryComponent,canActivate: [AuthGuard]},
   {
     path: 'admin/dashboard',
     component: AdminDashboardComponent,

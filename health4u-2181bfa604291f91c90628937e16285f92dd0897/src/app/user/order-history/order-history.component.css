@@ -1,0 +1,94 @@
+.container {
+    margin-top: 50px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    color: #343a40;
+  }
+  
+  .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+  }
+  
+  .table thead th {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 12px;
+    font-size: 20px; /* ปรับขนาดฟอนต์ในส่วนหัว */
+  }
+  
+  .table tbody td {
+    padding: 12px;
+    font-size: 18px; /* ปรับขนาดฟอนต์ในเนื้อหาของตาราง */
+    vertical-align: middle;
+  }
+  
+  .table img {
+    border-radius: 8px;
+    width: 100px;
+    height: auto;
+  }
+  
+  .table td, .table th {
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .table tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .total {
+    text-align: right;
+    font-size: 20px; /* ปรับขนาดฟอนต์ในส่วนของยอดรวม */
+    font-weight: 700;
+    color: #28a745;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 0.5em 1em;
+    font-size: 16px; /* ปรับขนาดฟอนต์ของ badge สถานะ */
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  
+  .status-pending {
+    background-color: #ffc107;
+    color: #212529;
+  }
+  
+  .status-processing {
+    background-color: #17a2b8;
+    color: white;
+  }
+  
+  .status-shipped {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .status-delivered {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .status-cancelled {
+    background-color: #dc3545;
+    color: white;
+  }
+  

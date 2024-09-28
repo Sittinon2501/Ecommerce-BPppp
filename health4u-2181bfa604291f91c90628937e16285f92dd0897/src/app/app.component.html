@@ -84,6 +84,11 @@
             <i class="bi bi-receipt"></i> Orders
           </a>
         </li>
+        <li class="nav-item" *ngIf="userRole !== 'Admin'">
+          <a class="nav-link" routerLink="order-history">
+            <i class="bi bi-clock-history"></i> Order History
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link text-danger font-weight-bold" (click)="logout()">
             <i class="bi bi-box-arrow-right"></i> Logout

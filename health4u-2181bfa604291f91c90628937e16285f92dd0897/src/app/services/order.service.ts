@@ -25,4 +25,8 @@ export class UserOrderService {
    cancelOrder(orderId: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/cancel/${orderId}`, { status: 'Cancelled' });
   }
+   // ฟังก์ชันสำหรับดึงประวัติคำสั่งซื้อ
+   getOrderHistory(userId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/history/${userId}`);
+  }
 }

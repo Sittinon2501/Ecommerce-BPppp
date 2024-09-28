@@ -28,9 +28,13 @@
         <td>
           <!-- ปุ่มยกเลิกคำสั่งซื้อ -->
           <button 
-            class="btn btn-danger btn-sm" 
+            class="btn btn-sm" 
+            [ngClass]="{
+              'btn-danger': order.Status === 'Pending', 
+              'btn-secondary': order.Status !== 'Pending'
+            }" 
             (click)="cancelOrder(order.OrderId)" 
-            [disabled]="order.Status === 'Cancelled' || order.Status === 'Delivered'">
+            [disabled]="order.Status !== 'Pending'">
             Cancel Order
           </button>
         </td>

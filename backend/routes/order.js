@@ -3,7 +3,8 @@ const {
   getAllOrders,
   updateOrderStatus,
   getUserOrders,
-cancelOrder
+  cancelOrder,
+  getOrderHistory,
 } = require("../controllers/orderController");
 const router = express.Router();
 
@@ -12,5 +13,7 @@ router.get("/user/:userId", getUserOrders); // เส้นทางสำหร
 router.get("/admin", getAllOrders);
 // เส้นทางสำหรับอัปเดตสถานะคำสั่งซื้อ
 router.put("/admin/:orderId/status", updateOrderStatus);
-router.put("/cancel/:orderId",cancelOrder );
+router.put("/cancel/:orderId", cancelOrder);
+router.get("/history/:userId", getOrderHistory); // เพิ่มเส้นทางสำหรับดึงประวัติคำสั่งซื้อ
+
 module.exports = router;
