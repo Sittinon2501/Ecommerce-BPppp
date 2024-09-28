@@ -1,0 +1,76 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Admin Reports</h2>
+  
+    <div class="row mb-4">
+      <div class="col-md-5">
+        <label for="startDate">Start Date</label>
+        <input type="date" [(ngModel)]="startDate" class="form-control">
+      </div>
+      <div class="col-md-5">
+        <label for="endDate">End Date</label>
+        <input type="date" [(ngModel)]="endDate" class="form-control">
+      </div>
+      <div class="col-md-2 d-flex align-items-end">
+        <button class="btn btn-primary" (click)="loadTopSellingProducts(); loadLowSellingProducts(); loadRevenueReport();">Load Reports</button>
+      </div>
+    </div>
+  
+    <!-- รายงานสินค้าขายดี -->
+    <h3>Top Selling Products</h3>
+    <button class="btn btn-success mb-2" (click)="exportToExcel('top-selling')">Export Top Selling Products to Excel</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Total Sold</th>
+          <th>Total Revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of topSellingProducts">
+          <td>{{ product.ProductName }}</td>
+          <td>{{ product.TotalSold }}</td>
+          <td>{{ product.TotalRevenue | number:'1.2-2' }} THB</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- รายงานสินค้าที่ขายไม่ดี -->
+    <h3>Low Selling Products</h3>
+    <button class="btn btn-success mb-2" (click)="exportToExcel('low-selling')">Export Low Selling Products to Excel</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Total Sold</th>
+          <th>Total Revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of lowSellingProducts">
+          <td>{{ product.ProductName }}</td>
+          <td>{{ product.TotalSold }}</td>
+          <td>{{ product.TotalRevenue | number:'1.2-2' }} THB</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- รายงานรายได้ -->
+    <h3>Revenue Report</h3>
+    <button class="btn btn-success mb-2" (click)="exportToExcel('revenue')">Export Revenue Report to Excel</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Total Revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let revenue of revenueReport">
+          <td>{{ revenue.Month }}</td>
+          <td>{{ revenue.TotalRevenue | number:'1.2-2' }} THB</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
