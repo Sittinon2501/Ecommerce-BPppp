@@ -1,33 +1,54 @@
 .container {
   margin-top: 50px;
+  background-color: #C4DAD2;
+  /* พื้นหลังสีที่คุณเลือก */
+  padding: 30px;
+  /* เพิ่ม padding รอบๆ เนื้อหา */
+  border-radius: 10px;
+  /* มุมโค้งมน */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* เพิ่มเงา */
+  max-width: 1600px;
+  /* ขยายความกว้างของ container */
+  margin-left: auto;
+  /* จัดให้อยู่กลางจอ */
+  margin-right: auto;
+  /* จัดให้อยู่กลางจอ */
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  /* เพิ่มพื้นที่ด้านล่าง */
   font-weight: 700;
-  color: #343a40;
+  color: white;
+  /* เปลี่ยนสีตัวอักษรเป็นสีขาว */
+  font-size: 2.5rem;
+  /* ขยายขนาดฟอนต์หัวข้อ */
 }
 
-.table {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 1rem;
-  background-color: transparent;
-  border-collapse: collapse;
-}
 
 .table thead th {
-  background-color: #343a40;
+  background-color: #16423C;
   color: #ffffff;
   padding: 12px;
-  font-size: 20px; /* ปรับขนาดฟอนต์ในส่วนหัว */
+  font-size: 20px;
+  /* ปรับขนาดฟอนต์ในส่วนหัว */
+  text-align: center;
+  white-space: nowrap;
+  /* ป้องกันการตัดบรรทัดในส่วนหัว */
+
+  
 }
 
 .table tbody td {
   padding: 12px;
-  font-size: 18px; /* ปรับขนาดฟอนต์ในเนื้อหาของตาราง */
+  font-size: 18px;
+  /* ปรับขนาดฟอนต์ในเนื้อหาของตาราง */
   vertical-align: middle;
+  text-align: center;
+  /* จัดข้อความตรงกลาง */
+
 }
 
 .table img {
@@ -36,16 +57,20 @@ h2 {
   height: auto;
 }
 
-.table td, .table th {
+.table td,
+.table th {
   border-top: 1px solid #dee2e6;
+  
 }
 
 .table tbody tr:nth-of-type(odd) {
   background-color: #f9f9f9;
+  
 }
 
 .table tbody tr:hover {
   background-color: #f1f1f1;
+  
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -54,31 +79,41 @@ h2 {
 
 .total {
   text-align: right;
-  font-size: 20px; /* ปรับขนาดฟอนต์ในส่วนของยอดรวม */
+  font-size: 20px;
+  /* ปรับขนาดฟอนต์ในส่วนของยอดรวม */
   font-weight: 700;
   color: #28a745;
+  border-radius: 10px;
+
 }
 
 .status-badge {
   display: inline-block;
+  width: 120px;
+  /* กำหนดความกว้างคงที่ให้ปุ่ม */
   padding: 0.5em 1em;
-  font-size: 16px; /* ปรับขนาดฟอนต์ของ badge สถานะ */
+  font-size: 16px;
+  /* ปรับขนาดฟอนต์ของ badge สถานะ */
   border-radius: 5px;
   font-weight: 500;
+  text-align: center;
+  /* จัดข้อความให้อยู่กลาง */
+  white-space: nowrap;
+  /* ป้องกันการตัดบรรทัด */
 }
 
 .status-pending {
-  background-color: #ffc107;
-  color: #212529;
+  background-color: #16423C;
+  color: white;
 }
 
 .status-processing {
-  background-color: #17a2b8;
+  background-color: #6A9C89;
   color: white;
 }
 
 .status-shipped {
-  background-color: #007bff;
+  background-color: #32c991;
   color: white;
 }
 
@@ -90,4 +125,21 @@ h2 {
 .status-cancelled {
   background-color: #dc3545;
   color: white;
+}
+
+/* ปรับปุ่มให้ดูสวยงาม */
+button.btn.btn-sm {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+}
+.table {
+  width: 100%;
+  border-radius: 10px; /* มุมโค้งมน */
+  overflow: hidden; /* เพื่อให้มุมโค้งมนเห็นได้ชัด */
+  margin-top: 20px;
+  overflow: hidden; /* ป้องกันการล้น */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
 }

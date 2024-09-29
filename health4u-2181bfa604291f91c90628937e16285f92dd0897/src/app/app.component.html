@@ -47,7 +47,7 @@
 
 <!-- User Navbar -->
 <ng-template #userNavbar>
-  <nav *ngIf="showNavbar" class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav *ngIf="showNavbar" class="navbar navbar-expand-lg custom-navbar">
     <a class="navbar-brand" href="#">
       <i class="bi bi-basket"></i> Health4U
     </a>
@@ -103,9 +103,9 @@
     </div>
   </nav>
 
-  <div class="container mt-3">
-    <router-outlet></router-outlet>
-  </div>
+ <div class="container-wide mt-3">
+  <router-outlet></router-outlet>
+</div>
 
 
   <!-- Footer component ที่จะถูกแสดงเฉพาะเมื่อ userRole ไม่ใช่ 'Admin' และไม่ใช่ login หรือ register -->

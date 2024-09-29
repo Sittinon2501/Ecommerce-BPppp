@@ -42,51 +42,61 @@
   padding: 20px;
 }
 
-/* User Navbar Styling */
-.navbar {
+/* Custom Navbar Styling */
+.custom-navbar {
+  background-color: #16423C; /* พื้นหลังของ navbar */
+  color: #E9EFEC; /* สีข้อความใน navbar */
   font-size: 16px;
   padding: 15px;
-  background-color: #f8f9fa;
   position: sticky;
-  top: 0; /* This will make the navbar fixed at the top when scrolling */
-  z-index: 1000; /* Ensure navbar stays above other elements */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for better visibility */
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาที่เพิ่มเข้ามาให้ navbar */
 }
 
-.navbar .nav-link {
-  color: #343a40;
+.custom-navbar .navbar-brand {
+  color: #E9EFEC; /* สีของชื่อแบรนด์ใน navbar */
+  font-weight: bold;
+}
+
+.custom-navbar .navbar-toggler-icon {
+  background-color: #E9EFEC; /* สีของปุ่ม toggle */
+}
+
+.custom-navbar .nav-link {
+  color: #E9EFEC; /* สีของลิงก์ใน navbar */
   margin-right: 15px;
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.navbar .nav-link:hover {
-  color: #007bff;
-  background-color: rgba(0, 123, 255, 0.1); /* Subtle background color on hover */
+.custom-navbar .nav-link:hover {
+  color: #C4DAD2; /* สี hover ของลิงก์ */
+  background-color: rgba(196, 218, 210, 0.1); /* สีพื้นหลังเมื่อ hover */
   border-radius: 5px;
 }
 
-.navbar .nav-link.text-danger {
+.custom-navbar .nav-link.text-danger {
   color: #dc3545;
   font-weight: bold;
 }
 
-.navbar .nav-link.text-danger:hover {
+.custom-navbar .nav-link.text-danger:hover {
   color: #ff0000;
 }
 
-/* Adjust spacing for items aligned left (mr-auto) and right (ml-auto) */
-.navbar-nav.ml-auto .nav-item .nav-link {
-  text-align: right;
+/* Navbar alignment */
+.navbar-nav.ml-auto {
+  margin-left: auto; /* ทำให้กลุ่มของลิงก์ขวาสุด */
 }
 
-.navbar-nav.mr-auto .nav-item .nav-link {
-  text-align: left;
-  margin-right: 15px;
+.navbar-nav.mr-auto {
+  margin-right: auto; /* ทำให้กลุ่มของลิงก์ซ้ายสุด */
 }
 
-.navbar .nav-item {
+.custom-navbar .nav-item {
   margin-left: 10px;
 }
+
 
 /* Products and Blogs on the left, Cart, Orders, Logout on the right */
 .navbar .navbar-nav.mr-auto {
@@ -108,4 +118,11 @@ footer {
   padding: 10px;
   text-align: center;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for footer */
+}
+.container-wide {
+  width: 100%; /* ขยายความกว้างเต็มหน้าจอ */
+  max-width: 1800px; /* ตั้งความกว้างสูงสุดของ container */
+  margin: 0 auto; /* จัดให้อยู่ตรงกลาง */
+  padding: 20px; /* เพิ่ม padding รอบๆ container */
+   min-height: 500px; /* กำหนดความสูงขั้นต่ำ */
 }

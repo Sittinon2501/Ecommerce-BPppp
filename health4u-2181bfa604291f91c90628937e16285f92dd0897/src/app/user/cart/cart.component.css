@@ -1,31 +1,95 @@
+.container {
+  padding: 20px;
+  background-color: #C4DAD2; /* สีพื้นหลังสำหรับ container */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1600px;
+}
+
+h2 {
+  font-weight: bold;
+  color: #16423C; /* สีสำหรับหัวข้อ */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .table {
-    margin-top: 20px;
-  }
-  
-  .table th, .table td {
-    vertical-align: middle;
-  }
-  
-  input[type="number"] {
-    width: 60px;
-    text-align: center;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    border: none;
-  }
-  
-  .btn-success {
-    background-color: #28a745;
-    border: none;
-  }
-  
-  h4 {
-    margin-top: 20px;
-  }
-  
-  .empty-cart {
-    margin-top: 40px;
-  }
-  
+  margin-top: 20px;
+  background-color: #C4DAD2; /* พื้นหลังของตาราง */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  text-align: center;
+  padding: 12px;
+}
+
+.table th {
+  background-color: #16423C; /* สีสำหรับส่วนหัวของตาราง */
+  color: white;
+  font-size: 18px;
+}
+
+.table td {
+  background-color: #E9EFEC; /* สีพื้นหลังในแต่ละ cell */
+  font-size: 16px;
+}
+
+input[type="number"] {
+  width: 60px;
+  text-align: center;
+  border: 1px solid #6A9C89; /* ขอบสี #6A9C89 */
+  border-radius: 5px;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-success {
+  background-color: #6A9C89; /* ใช้สี #6A9C89 สำหรับปุ่ม Checkout */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #16423C; /* เปลี่ยนสีเมื่อ hover */
+}
+
+h4 {
+  color: #16423C; /* สีของข้อความ Total */
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.empty-cart {
+  margin-top: 40px;
+  color: #6A9C89; /* ใช้สี #6A9C89 สำหรับข้อความตะกร้าว่าง */
+}
+
+.btn-primary {
+  background-color: #6A9C89; /* ใช้สี #6A9C89 สำหรับปุ่ม Continue Shopping */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #16423C; /* เปลี่ยนสีเมื่อ hover */
+}

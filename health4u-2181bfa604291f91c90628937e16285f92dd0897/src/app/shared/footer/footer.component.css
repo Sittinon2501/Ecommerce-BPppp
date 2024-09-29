@@ -1,62 +1,61 @@
 /* Footer Customization */
 footer {
-    background-color: #f8f9fa;
-    padding-top: 60px;
+    background-color: #16423C; /* พื้นหลังของ footer เป็นสี #16423C */
+    padding-top: 0px;
     padding-bottom: 20px;
-    color: #6c757d;
+    color: #E9EFEC; /* สีข้อความหลักใน footer เป็นสี #E9EFEC */
 }
 
 footer a {
-    color: #6c757d;
+    color: #C4DAD2; /* สีลิงก์เป็นสี #C4DAD2 */
     transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: #0d6efd; /* Bootstrap Primary Color */
+    color: #6A9C89; /* สีลิงก์เมื่อ hover เป็น #6A9C89 */
     text-decoration: none;
 }
 
 footer h6 {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #212529;
+    color: #E9EFEC; /* สีของหัวข้อใน footer เป็น #E9EFEC */
 }
 
 footer .text-reset {
     font-size: 0.9rem;
-    color: #6c757d;
+    color: #C4DAD2; /* สีของข้อความรายละเอียดเป็นสี #C4DAD2 */
 }
 
 footer p {
     margin-bottom: 10px;
+    color: #E9EFEC; /* สีข้อความ */
 }
 
 footer .bi {
     font-size: 1.5rem;
     margin-right: 15px;
-    color: #6c757d;
+    color: #C4DAD2; /* สีของไอคอนเป็นสี #C4DAD2 */
 }
 
 footer .bi:hover {
-    color: #0d6efd;
+    color: #6A9C89; /* สีของไอคอนเมื่อ hover เป็นสี #6A9C89 */
 }
 
 footer .border-bottom {
-    border-color: rgba(0, 0, 0, 0.1) !important;
+    border-color: rgba(233, 239, 236, 0.1) !important; /* ขอบล่างเป็นโปร่งแสง */
 }
 
-footer .bg-body-tertiary {
-    background-color: #f1f3f5;
-}
+
 
 footer .social-media a {
     font-size: 1.25rem;
     margin-right: 1rem;
-    color: #6c757d;
+    color: #C4DAD2;
 }
 
 footer .social-media a:hover {
-    color: #0d6efd;
+    color: #6A9C89;
 }
 
 footer .container {

@@ -1,5 +1,6 @@
 <!-- category.component.html -->
-<div class="container mt-4">
+<div class="container mt-4" style="padding: 20px; border-radius: 10px;">
+  <!-- Carousel Section -->
   <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
@@ -9,17 +10,15 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="10000">
-        <img
-          src="https://kassa-bnnvara.cdn.prepr.io/%7Bformat%7D/5d9lrb18nxzs-skincare.jpg"
-          class="d-block w-100" alt="Skincare Products">
+        <img src="https://kassa-bnnvara.cdn.prepr.io/%7Bformat%7D/5d9lrb18nxzs-skincare.jpg" class="d-block w-100"
+          alt="Skincare Products">
         <div class="carousel-caption d-none d-md-block">
           <h5>Natural Skincare</h5>
           <p>Explore the best skincare products for your skin's health.</p>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="2000">
-        <img src="https://img.kapook.com/u/2020/jutharat/qq1/zxx11.jpg"
-          class="d-block w-100" alt="Skincare Routine">
+        <img src="https://img.kapook.com/u/2020/jutharat/qq1/zxx11.jpg" class="d-block w-100" alt="Skincare Routine">
         <div class="carousel-caption d-none d-md-block">
           <h5>Skincare Routine</h5>
           <p>Follow a healthy routine to keep your skin glowing every day.</p>
@@ -45,19 +44,21 @@
     </button>
   </div>
 
+  <!-- Category Section -->
+  <div class="container category-section mt-4" style="background-color: #6A9C89; padding: 20px; border-radius: 10px;">
+    <h2 style="text-align: center; color:#E9EFEC;">Categories</h2>
 
-  <div class="container mt-4">
-    <h2 style="text-align: center;">Categories</h2>
-  
     <div class="row">
       <div class="col-md-4 mb-3" *ngFor="let category of categories">
-        <div class="card" (click)="viewProducts(category.CategoryId)" style="cursor: pointer;"> <!-- ทำให้ card กดได้ -->
+        <div class="card" (click)="viewProducts(category.CategoryId)" style="cursor: pointer;">
+          <!-- ทำให้ card กดได้ -->
           <img [src]="'http://localhost:3000' + category.ImageUrl" class="card-img-top" alt="Category Image" width="5">
           <div class="card-body">
-            <h5 class="card-title">{{ category.CategoryName }}</h5> <!-- แสดงชื่อหมวดหมู่ -->
+            <h5 class="card-title" style="color: #16423C; font-size: 1.2rem;">{{ category.CategoryName }}</h5>
+            <!-- ขยายตัวหนังสือหมวดหมู่ -->
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

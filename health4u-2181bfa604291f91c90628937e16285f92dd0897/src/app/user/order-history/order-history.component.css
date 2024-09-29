@@ -1,94 +1,128 @@
 .container {
-    margin-top: 50px;
-  }
+  margin-top: 50px;
+  background-color: #C4DAD2;
+  /* ใส่สีพื้นหลัง */
+  padding: 30px;
+  /* เพิ่ม padding รอบๆ container */
+  border-radius: 10px;
+  /* มุมโค้งมน */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* เพิ่มเงา */
+  max-width: 1600px;
+  margin-left: auto;
+  /* จัดให้อยู่ตรงกลาง */
+  margin-right: auto;
+  /* จัดให้อยู่ตรงกลาง */
   
-  h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-weight: 700;
-    color: #343a40;
-  }
-  
-  .table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-    border-collapse: collapse;
-  }
-  
-  .table thead th {
-    background-color: #343a40;
-    color: #ffffff;
-    padding: 12px;
-    font-size: 20px; /* ปรับขนาดฟอนต์ในส่วนหัว */
-  }
-  
-  .table tbody td {
-    padding: 12px;
-    font-size: 18px; /* ปรับขนาดฟอนต์ในเนื้อหาของตาราง */
-    vertical-align: middle;
-  }
-  
-  .table img {
-    border-radius: 8px;
-    width: 100px;
-    height: auto;
-  }
-  
-  .table td, .table th {
-    border-top: 1px solid #dee2e6;
-  }
-  
-  .table tbody tr:nth-of-type(odd) {
-    background-color: #f9f9f9;
-  }
-  
-  .table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-  
-  .total {
-    text-align: right;
-    font-size: 20px; /* ปรับขนาดฟอนต์ในส่วนของยอดรวม */
-    font-weight: 700;
-    color: #28a745;
-  }
-  
-  .status-badge {
-    display: inline-block;
-    padding: 0.5em 1em;
-    font-size: 16px; /* ปรับขนาดฟอนต์ของ badge สถานะ */
-    border-radius: 5px;
-    font-weight: 500;
-  }
-  
-  .status-pending {
-    background-color: #ffc107;
-    color: #212529;
-  }
-  
-  .status-processing {
-    background-color: #17a2b8;
-    color: white;
-  }
-  
-  .status-shipped {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .status-delivered {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .status-cancelled {
-    background-color: #dc3545;
-    color: white;
-  }
-  
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: white;
+  /* เปลี่ยนสีตัวอักษรของหัวข้อ */
+  font-size: 2.5rem;
+  /* ขยายขนาดฟอนต์ */
+}
+
+.table {
+  width: 100%;
+  background-color: #E9EFEC;
+  /* ใส่สีพื้นหลังให้กับตาราง */
+  border-radius: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+  /* ป้องกันการล้น */
+  table-layout: auto;
+  /* ให้ตารางมีการกระจายตัวแบบอัตโนมัติ */
+}
+
+.table thead th {
+  background-color: #16423C;
+  padding: 12px;
+  font-size: 1.2rem;
+  /* ปรับขนาดฟอนต์ในส่วนหัว */
+  text-align: center;
+  white-space: nowrap;
+  color: white;
+}
+
+.table tbody td {
+  padding: 15px;
+  font-size: 1.2rem;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+.table tbody td img {
+  max-width: 100px;
+  height: auto;
+}
+
+.table td,
+.table th {
+  border-top: 1px solid #dee2e6;
+}
+
+.table tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.total {
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #28a745;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.5em 1.5em;
+  /* เพิ่ม padding เพื่อขยายพื้นที่ภายใน */
+  font-size: 1rem;
+  border-radius: 5px;
+  font-weight: 500;
+  white-space: nowrap;
+  /* ป้องกันการตัดบรรทัด */
+  width: auto;
+  /* ปรับขนาดให้พอดีกับข้อความ */
+  min-width: 250px;
+  /* กำหนดความกว้างขั้นต่ำเพื่อให้ป้ายไม่เล็กเกินไป */
+  text-align: center;
+  /* จัดข้อความให้อยู่กลาง */
+}
+
+/* ปรับสีตามสถานะ */
+.status-pending {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.status-processing {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.status-shipped {
+  background-color: #007bff;
+  color: white;
+}
+
+.status-delivered {
+  background-color: #28a745;
+  color: white;
+}
+
+.status-cancelled {
+  background-color: #dc3545;
+  color: white;
+}
+.table tbody td:nth-child(6) { /* เลือกเฉพาะคอลัมน์วันที่ */
+  white-space: nowrap; /* ป้องกันการตัดบรรทัด */
+}
