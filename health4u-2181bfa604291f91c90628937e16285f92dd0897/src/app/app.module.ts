@@ -36,6 +36,7 @@ import { CartComponent } from './user/cart/cart.component';
 import { UserOrderComponent } from './user/user-order/user-order.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { OrderHistoryComponent } from './user/order-history/order-history.component';
+import { AdminReportComponent } from './admin/admin-report/admin-report.component';
 
 
 @NgModule({
@@ -58,6 +59,8 @@ import { OrderHistoryComponent } from './user/order-history/order-history.compon
     CartComponent,
     UserOrderComponent,
     OrderHistoryComponent,
+    AdminReportComponent,
+    
   ],
   imports: [
     BrowserModule,

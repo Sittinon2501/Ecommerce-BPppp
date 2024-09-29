@@ -1,34 +1,36 @@
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Order History</h2>
-  
-    <table class="table table-striped table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Product</th>
-          <th scope="col">Image</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Price</th>
-          <th scope="col">Total</th>
-          <th scope="col">Order Date</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let order of orderHistory">
-          <td>{{ order.ProductName }}</td>
-          <td>
-            <img [src]="'http://localhost:3000' + order.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 100px;">
-          </td>
-          <td>{{ order.Quantity }}</td>
-          <td>{{ order.Price | number: '1.2-2' }} THB</td>
-          <td>{{ (order.Quantity * order.Price) | number: '1.2-2' }} THB</td>
-          <td>{{ order.OrderDate | date:'mediumDate' }}</td>
-          <td>{{ order.Status }}</td>
-        </tr>
-        <tr *ngIf="orderHistory.length === 0">
-          <td colspan="7" class="text-center">No order history available</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <h2 class="text-center mb-4" style="color: #16423C;">Order History</h2>
+
+  <table class="table table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Image</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Total</th>
+        <th scope="col" style="white-space: nowrap;">Order Date</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let order of orderHistory">
+        <td>{{ order.ProductName }}</td>
+        <td>
+          <img [src]="'http://localhost:3000' + order.ImageUrl" alt="Product Image" class="img-thumbnail">
+        </td>
+        <td>{{ order.Quantity }}</td>
+        <td>{{ order.Price | number:'1.2-2' }}&nbsp;THB</td>
+        <td>{{ (order.Quantity * order.Price) | number:'1.2-2' }}&nbsp;THB</td>
+        <td>{{ order.OrderDate | date:'mediumDate' }}</td>
+        <td>
+          <span class="status-badge status-{{ order.Status.toLowerCase() }}">{{ order.Status }}</span>
+        </td>
+      </tr>
+      <tr *ngIf="orderHistory.length === 0">
+        <td colspan="7" class="text-center">No order history available</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

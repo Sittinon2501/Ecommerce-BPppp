@@ -1,98 +1,133 @@
-/* login.component.css */
+/* Full-page background gradient */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
 
-/* Fade-in and slide down animation */
-/* login.component.css */
+.outer-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #16423C, #6A9C89, #C4DAD2, #E9EFEC); /* Gradient background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Login container */
+.container {
+  width: 100%;
+  max-width: 500px; /* Adjust the max width of the card */
+  padding: 20px;
+}
+
+/* Login card with transparent background */
+.card {
+  border-radius: 15px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); /* Apply blur for a frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: light border to separate from background */
+}
+
+/* Card heading */
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: #ffffff; /* White text for better contrast on the gradient background */
+  font-size: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form input fields */
+.form-control {
+  border-radius: 50px;
+  padding: 15px 20px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent input fields */
+}
+
+.form-control:focus {
+  border-color: #6A9C89;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Input icons */
+.input-group-text {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50px 0 0 50px;
+  border: 1px solid #ccc;
+  color: #16423C;
+}
+
+/* Buttons */
+button[type="submit"] {
+  border-radius: 50px;
+  background-color: #6A9C89;
+  border: none;
+  padding: 15px 0;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #16423C;
+  color: white;
+}
+
+/* Nav link */
+.nav-link {
+  font-size: 18px;
+  color: #6A9C89; /* Default color */
+  text-align: center;
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover state for the nav-link */
+.nav-link:hover {
+  color: #16423C; /* Hover color */
+}
+
+/* Add some space below the button */
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
 
 /* Fade-in and slide down animation */
 @keyframes fade-slide-in {
-    0% {
-      opacity: 0; /* เริ่มต้นโปร่งใสเต็มที่ */
-      transform: translateY(-50px); /* เริ่มจากข้างบน */
-    }
-    50% {
-      opacity: 0.5; /* เฟดช้าในช่วงแรก */
-      transform: translateY(-25px); /* เลื่อนลงครึ่งทาง */
-    }
-    100% {
-      opacity: 1; /* มองเห็นเต็มที่ */
-      transform: translateY(0); /* กลับมาที่ตำแหน่งปกติ */
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
   }
-  
-  /* Apply the animation to the card */
-  .fade-slide-in {
-    animation: fade-slide-in 2s ease-in-out;
+  50% {
+    opacity: 0.5;
+    transform: translateY(-25px);
   }
-  
-  
-  /* Background for the entire page */
-  body {
-    background: linear-gradient(45deg, #6ab7ff, #4fc3f7);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Styling for the login card */
-  .card {
-    border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
-    width: 450px;
-  }
-  
-  /* Form input fields */
-  .form-control {
-    border-radius: 50px;
-    padding: 15px 20px;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    transition: all 0.3s ease;
-  }
-  
-  .form-control:focus {
-    border-color: #2196f3;
-    box-shadow: none;
-    outline: none;
-  }
-  
-  /* Buttons */
-  button[type="submit"] {
-    border-radius: 50px;
-    background-color: #007bff;
-    border: none;
-    padding: 15px 0;
-    font-size: 20px;
-    transition: all 0.3s ease;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  .nav-link {
-    font-size: 18px;
-    color: #007bff;
-  }
-  
-  .nav-link:hover {
-    color: #0056b3;
-  }
-  
-  /* Heading */
-  h2 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    color: #007bff;
-    font-size: 30px;
-    margin-bottom: 20px;
-  }
-  
-  /* Add some space below the button */
-  .mb-3 {
-    margin-bottom: 1.5rem;
-  }
-  
+}
+
+/* Apply the animation to the card */
+.fade-slide-in {
+  animation: fade-slide-in 2s ease-in-out;
+}
+
+/* General button hover styling */
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}

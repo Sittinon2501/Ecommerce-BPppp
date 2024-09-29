@@ -128,7 +128,7 @@ exports.updateCartItem = async (req, res) => {
 
 // ลบเฉพาะรายการที่ถูก checkout ออกจากตะกร้า
 exports.checkout = async (req, res) => {
-  const { items, total, userId } = req.body; // รับ userId จาก frontend
+  const { items, userId } = req.body; // รับ userId จาก frontend
 
   if (!userId) {
     return res
@@ -139,19 +139,20 @@ exports.checkout = async (req, res) => {
   try {
     const pool = await poolPromise;
 
-    // สร้างคำสั่งซื้อใหม่ในตาราง Orders
-    const orderResult = await pool
-      .request()
-      .input("UserId", userId)
-      .input("TotalAmount", total)
-      .query(
-        "INSERT INTO Orders (UserId, TotalAmount, OrderDate) OUTPUT INSERTED.OrderId VALUES (@UserId, @TotalAmount, GETDATE())"
-      );
-
-    const orderId = orderResult.recordset[0].OrderId;
-
-    // เพิ่มสินค้าในตาราง OrderItems
+    // ลูปผ่านสินค้าทุกชิ้นเพื่อสร้างคำสั่งซื้อแยกกัน
     for (const item of items) {
+      // สร้างคำสั่งซื้อใหม่สำหรับแต่ละสินค้าในตาราง Orders
+      const orderResult = await pool
+        .request()
+        .input("UserId", userId)
+        .input("TotalAmount", item.Price * item.Quantity) // ใช้ราคาและจำนวนสินค้าของแต่ละรายการ
+        .query(
+          "INSERT INTO Orders (UserId, TotalAmount, OrderDate) OUTPUT INSERTED.OrderId VALUES (@UserId, @TotalAmount, GETDATE())"
+        );
+
+      const orderId = orderResult.recordset[0].OrderId;
+
+      // เพิ่มสินค้าในตาราง OrderItems ที่เชื่อมกับ OrderId
       await pool
         .request()
         .input("OrderId", orderId)
@@ -170,10 +171,8 @@ exports.checkout = async (req, res) => {
         .query(
           "UPDATE Products SET Stock = Stock - @Quantity WHERE ProductId = @ProductId"
         );
-    }
 
-    // ลบเฉพาะรายการที่ถูก checkout ออกจากตะกร้า
-    for (const item of items) {
+      // ลบรายการที่ถูก checkout ออกจากตะกร้า
       await pool
         .request()
         .input("UserId", userId)

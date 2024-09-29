@@ -9,6 +9,7 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const cartRoutes = require("./routes/cart"); // นำเข้าตารางเส้นทางสำหรับ Cart
 const addAdmin = require("./routes/admin"); // นำเข้าเส้นทางสำหรับ Admin
 const chartRoutes = require("./routes/chart");
+const reportRoutes = require('./routes/reportRoutes');
 const path = require("path");
 const app = express();
 
@@ -41,6 +42,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/cart", cartRoutes); // เพิ่ม /api/cart เพื่อให้สอดคล้องกับ API อื่น ๆ
 app.use("/api/admin", addAdmin); // เพิ่มเส้นทางสำหรับ Admin
 app.use("/api/charts", chartRoutes);
+app.use('/api/reports', reportRoutes); // เพิ่ม route สำหรับ reports
 // Static files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

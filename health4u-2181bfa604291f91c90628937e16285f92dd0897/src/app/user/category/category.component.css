@@ -1,9 +1,19 @@
 /* Carousel Styling */
+/* Carousel Background */
 .carousel {
+  background-color: #C4DAD2; /* ใช้สีพื้นหลัง #C4DAD2 สำหรับ carousel */
   margin-top: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+}
+
+/* Background for category section */
+.category-section {
+  background-color: #E9EFEC; /* ใช้สีพื้นหลัง #E9EFEC สำหรับส่วนหมวดหมู่ */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-item img {
@@ -12,15 +22,15 @@
 }
 
 .carousel-caption {
-  background: rgba(0, 0, 0, 0.5); /* Transparent background */
+  background: rgba(22, 66, 60, 0.7); /* ใช้สี #16423C เป็นพื้นหลังแบบโปร่งแสง */
   padding: 15px;
-  border-radius: 5px;
-  color: white; /* Change font color to white */
+  border-radius: 50px;
+  color: #E9EFEC; /* เปลี่ยนสีตัวหนังสือเป็น #E9EFEC */
 }
 
 .carousel-control-prev-icon, 
 .carousel-control-next-icon {
-  background-color: #007bff; /* Change icon color */
+  background-color: #6A9C89; /* ใช้สี #6A9C89 สำหรับไอคอน */
   border-radius: 50%; /* Make icons circular */
   padding: 10px;
 }
@@ -37,19 +47,18 @@
 }
 
 .card-img-top {
-  border-radius: 10px 10px 0 0; /* Rounded corners */
-  height: 200px; /* Fixed height */
+  height: 300px; /* Fixed height */
   object-fit: cover; /* Maintain aspect ratio */
 }
 
 .card-body {
   text-align: center;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: #E9EFEC; /* ใช้สี #E9EFEC สำหรับพื้นหลัง */
 }
 
 .card-body .btn {
-  background-color: #007bff;
+  background-color: #16423C; /* ใช้สี #16423C สำหรับปุ่ม */
   color: white;
   font-weight: bold;
   border: none;
@@ -58,12 +67,25 @@
 }
 
 .card-body .btn:hover {
-  background-color: #0056b3;
+  background-color: #6A9C89; /* ใช้สี #6A9C89 สำหรับปุ่มเมื่อ hover */
 }
 
 h2 {
   font-weight: 700;
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #333;
+  color: #16423C; /* ใช้สี #16423C สำหรับตัวหนังสือหัวข้อ */
+}
+body {
+  background-color: #6A9C89; /* สีพื้นหลังสำหรับทั้งหน้า */
+}
+
+.container {
+  background-color: #C4DAD2; /* พื้นหลังของ container */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* ขยายความกว้างเต็มหน้าจอ */
+  max-width: 1600px; /* จำกัดความกว้างสูงสุด */
+  margin: 0 auto; /* จัดให้อยู่ตรงกลางหน้าจอ */
 }

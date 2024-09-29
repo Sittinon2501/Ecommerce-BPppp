@@ -1,41 +1,55 @@
 .container {
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    font-weight: bold;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
-  }
-  
-  .text-danger {
-    font-weight: bold;
-  }
-  
-  .img-fluid {
-    border-radius: 10px;
-  }
-  
-  .form-group {
-    margin-top: 15px;
-  }
-  
-  label {
-    font-size: 1.1em;
-  }
-  
-  .bi {
-    margin-right: 5px;
-  }
-  
+  padding: 20px;
+  background-color: #C4DAD2; /* ใช้สี #E9EFEC สำหรับพื้นหลังของ container */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1600px;  
+}
+
+h2 {
+  font-weight: bold;
+  color: #16423C; /* ใช้สี #16423C สำหรับหัวข้อ */
+}
+
+.btn-primary {
+  background-color: #6A9C89; /* ใช้สี #6A9C89 สำหรับปุ่ม */
+  border-color: #6A9C89;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #16423C; /* เปลี่ยนสีเมื่อ hover */
+  border-color: #16423C;
+  color: white;
+}
+
+.text-danger {
+  font-weight: bold;
+  color: #dc3545; /* สีแดงแจ้งเตือนสำหรับข้อความสินค้าหมด */
+}
+
+.img-fluid {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้ภาพ */
+}
+
+.form-group {
+  margin-top: 15px;
+}
+
+label {
+  font-size: 1.1em;
+  color: #16423C; /* ใช้สี #16423C สำหรับข้อความ label */
+}
+
+.bi {
+  margin-right: 5px;
+}
+
+p {
+  color: #16423C; /* ใช้สี #6A9C89 สำหรับข้อความทั่วไป */
+  font-size: 1.1rem;
+}
