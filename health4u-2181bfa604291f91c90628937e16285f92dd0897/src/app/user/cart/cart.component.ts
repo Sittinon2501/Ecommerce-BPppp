@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import Swal from 'sweetalert2';
 import { jwtDecode } from 'jwt-decode';
 import { CartService } from '../../services/cart.service';
+import QRCode from 'qrcode';
 
 @Component({
   selector: 'app-cart',
@@ -13,9 +14,9 @@ export class CartComponent implements OnInit {
   cartItems: any[] = []; // เก็บข้อมูลสินค้าทั้งหมดในตะกร้า
   totalAmount: number = 0; // เก็บยอดรวมราคาสินค้าในตะกร้า
   selectedItems: any[] = []; // เก็บสินค้าที่ถูกเลือกเพื่อ checkout
-  currentPage: number = 1;  // หน้าปัจจุบันสำหรับ pagination
-  totalPages: number = 1;  // จำนวนหน้าทั้งหมด
-  limit: number = 10;  // จำนวนรายการต่อหน้า
+  currentPage: number = 1; // หน้าปัจจุบันสำหรับ pagination
+  totalPages: number = 1; // จำนวนหน้าทั้งหมด
+  limit: number = 10; // จำนวนรายการต่อหน้า
 
   constructor(
     private cartService: CartService,
@@ -41,7 +42,7 @@ export class CartComponent implements OnInit {
             this.cartItems = response.data; // เก็บสินค้าที่ได้จาก backend ใน cartItems
             this.currentPage = response.currentPage; // อัปเดตหน้าปัจจุบัน
             this.totalPages = response.totalPages; // อัปเดตจำนวนหน้าทั้งหมด
-            this.calculateTotal();  // คำนวณยอดรวมของสินค้าในตะกร้า
+            this.calculateTotal(); // คำนวณยอดรวมของสินค้าในตะกร้า
           },
           (error) => {
             console.error('Error loading cart:', error);
@@ -161,7 +162,11 @@ export class CartComponent implements OnInit {
   // ฟังก์ชันสำหรับ Checkout สินค้าที่เลือก
   checkout(): void {
     if (this.selectedItems.length === 0) {
-      Swal.fire('Error', 'Please select at least one item to checkout.', 'error');
+      Swal.fire(
+        'Error',
+        'Please select at least one item to checkout.',
+        'error'
+      );
       return;
     }
 
@@ -193,29 +198,45 @@ export class CartComponent implements OnInit {
                 'error'
               );
             } else {
-              const cartData = {
-                items: this.selectedItems,
-                total: this.totalAmount,
-                userId: userId, // เพิ่ม userId ใน cartData
-              };
+              const totalAmount = this.totalAmount * 100; // แปลงเป็นหน่วยสตางค์
+              const qrData = `00020101021129370016${userId}000000010${totalAmount}0103${userId}0000`;
 
-              this.cartService.checkout(cartData).subscribe(
-                () => {
-                  Swal.fire('Success', 'Checkout completed successfully', 'success');
-
-                  // ลบรายการที่ถูก checkout ออกจาก cartItems
-                  this.cartItems = this.cartItems.filter(
-                    (item) => !this.selectedItems.includes(item)
-                  );
-
-                  this.selectedItems = [];
-                  this.calculateTotal();
-                },
-                (error) => {
-                  console.error('Error during checkout:', error);
-                  Swal.fire('Error', error.error.message || 'Checkout failed', 'error');
-                }
-              );
+              // ทำการ checkout
+              this.cartService
+                .checkout({
+                  items: this.selectedItems,
+                  total: this.totalAmount,
+                  userId: userId,
+                })
+                .subscribe(() => {
+                  // สร้าง QR Code สำหรับการชำระเงิน
+                  QRCode.toDataURL(qrData)
+                    .then((url) => {
+                      Swal.fire({
+                        title: 'Scan QR Code',
+                        html: `<img src="${url}" alt="QR Code" style="width: 200px; height: 200px;" />`,
+                        showCloseButton: true,
+                        confirmButtonText: 'Confirm Payment',
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          Swal.fire(
+                            'Payment Confirmed',
+                            'Thank you for your payment!',
+                            'success'
+                          );
+                          // ลบสินค้าที่ถูก checkout ออกจาก cartItems
+                          this.cartItems = this.cartItems.filter(
+                            (item) => !this.selectedItems.includes(item)
+                          );
+                          this.selectedItems = [];
+                          this.calculateTotal();
+                        }
+                      });
+                    })
+                    .catch((err) => {
+                      console.error('Error generating QR Code:', err);
+                    });
+                });
             }
           }
         },

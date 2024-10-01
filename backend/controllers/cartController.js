@@ -62,15 +62,13 @@ exports.addCartItem = async (req, res) => {
 // รับข้อมูลตะกร้าสำหรับผู้ใช้ พร้อม Pagination
 exports.getCartItems = async (req, res) => {
   const userId = req.params.userId;
-  const page = parseInt(req.query.page) || 1;  // หน้าเริ่มต้นคือ 1
-  const limit = parseInt(req.query.limit) || 10;  // จำนวนรายการต่อหน้า
-  const offset = (page - 1) * limit;  // คำนวณการข้ามรายการ (offset)
+  const page = parseInt(req.query.page) || 1; // หน้าเริ่มต้นคือ 1
+  const limit = parseInt(req.query.limit) || 10; // จำนวนรายการต่อหน้า
+  const offset = (page - 1) * limit; // คำนวณการข้ามรายการ (offset)
 
   try {
     const pool = await poolPromise;
-    const result = await pool.request()
-      .input("UserId", userId)
-      .query(`
+    const result = await pool.request().input("UserId", userId).query(`
         SELECT Cart.CartId, Cart.ProductId, Cart.Quantity, Cart.UserId, 
                Products.ProductName, Products.Price, Products.ImageUrl
         FROM Cart
@@ -81,7 +79,8 @@ exports.getCartItems = async (req, res) => {
       `);
 
     // ดึงจำนวนรายการทั้งหมดของผู้ใช้ในตะกร้า
-    const totalItemsResult = await pool.request().input("UserId", userId).query(`
+    const totalItemsResult = await pool.request().input("UserId", userId)
+      .query(`
       SELECT COUNT(*) as total FROM Cart WHERE UserId = @UserId
     `);
     const totalItems = totalItemsResult.recordset[0].total;
@@ -152,9 +151,7 @@ exports.checkout = async (req, res) => {
   const { items, userId } = req.body; // รับ userId จาก frontend
 
   if (!userId) {
-    return res
-      .status(400)
-      .json({ message: "UserId is required for checkout." });
+    return res.status(400).json({ message: "UserId is required for checkout." });
   }
 
   try {
@@ -209,6 +206,7 @@ exports.checkout = async (req, res) => {
     res.status(500).json({ message: "Error during checkout", error });
   }
 };
+
 
 // ฟังก์ชันตรวจสอบ stock
 exports.checkStock = async (req, res) => {
