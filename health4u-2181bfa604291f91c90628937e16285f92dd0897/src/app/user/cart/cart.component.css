@@ -93,3 +93,32 @@ h4 {
 .btn-primary:hover {
   background-color: #16423C; /* เปลี่ยนสีเมื่อ hover */
 }
+/* Pagination Button Container */
+.pagination {
+  display: flex;                /* ใช้ flexbox */
+  justify-content: center;      /* จัดกลางแนวนอน */
+  align-items: center;          /* จัดกลางแนวตั้ง */
+  margin: 20px 0;              /* เพิ่มระยะห่างบนและล่าง */
+}
+
+.pagination button {
+  background-color: #16423C;    /* สีพื้นหลัง */
+  color: white;                  /* สีตัวอักษร */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin: 0 5px;                /* ระยะห่างระหว่างปุ่ม */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #6A9C89;    /* สีเมื่อ hover */
+  transform: scale(1.05);       /* เพิ่มเอฟเฟกต์ขยายเมื่อ hover */
+}
+
+.pagination button:disabled {
+  background-color: #cccccc;     /* สีปุ่มเมื่อถูก disabled */
+  cursor: not-allowed;           /* แสดง cursor ว่าไม่สามารถคลิกได้ */
+}

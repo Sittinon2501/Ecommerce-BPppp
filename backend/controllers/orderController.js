@@ -1,10 +1,17 @@
 const { poolPromise } = require("../db");
 
 // ดึงข้อมูลคำสั่งซื้อของผู้ใช้
+
+// ดึงข้อมูลคำสั่งซื้อของผู้ใช้พร้อม Pagination โดยกรองคำสั่งซื้อที่มีสถานะ 'Delivered Successfully' และ 'Cancelled'
 exports.getUserOrders = async (req, res) => {
   const userId = req.params.userId;
+  const page = parseInt(req.query.page) || 1;  // หน้าเริ่มต้นคือ 1
+  const limit = parseInt(req.query.limit) || 10;  // จำนวนข้อมูลต่อหน้า
+  const offset = (page - 1) * limit;  // คำนวณการข้ามข้อมูล (offset)
+
   try {
     const pool = await poolPromise;
+    // ดึงข้อมูลคำสั่งซื้อที่ไม่ใช่ 'Delivered Successfully' หรือ 'Cancelled'
     const result = await pool.request().input("UserId", userId).query(`
       SELECT Orders.OrderId, Orders.TotalAmount, Orders.OrderDate, Orders.Status, 
              OrderItems.Quantity, OrderItems.Price, Products.ProductName, Products.ImageUrl 
@@ -12,16 +19,39 @@ exports.getUserOrders = async (req, res) => {
       JOIN OrderItems ON Orders.OrderId = OrderItems.OrderId
       JOIN Products ON OrderItems.ProductId = Products.ProductId
       WHERE Orders.UserId = @UserId
+        AND Orders.Status NOT IN ('Delivered Successfully', 'Cancelled')  -- กรองคำสั่งซื้อที่ไม่ต้องการ
+      ORDER BY Orders.OrderDate DESC
+      OFFSET ${offset} ROWS FETCH NEXT ${limit} ROWS ONLY;
     `);
 
-    res.status(200).json(result.recordset);
+    // ดึงจำนวนรายการคำสั่งซื้อที่ไม่ใช่ 'Delivered Successfully' และ 'Cancelled'
+    const totalOrdersResult = await pool.request().input("UserId", userId).query(`
+      SELECT COUNT(*) as total 
+      FROM Orders 
+      WHERE Orders.UserId = @UserId
+        AND Orders.Status NOT IN ('Delivered Successfully', 'Cancelled')
+    `);
+    const totalOrders = totalOrdersResult.recordset[0].total;
+
+    res.status(200).json({
+      data: result.recordset,
+      currentPage: page,
+      totalPages: Math.ceil(totalOrders / limit),
+      totalOrders: totalOrders,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error fetching user orders", error });
   }
 };
 
+
 // ดึงข้อมูลคำสั่งซื้อทั้งหมด
+// ดึงข้อมูลคำสั่งซื้อทั้งหมดพร้อม Pagination (สำหรับ Admin)
 exports.getAllOrders = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;  // หน้าเริ่มต้นคือ 1
+  const limit = parseInt(req.query.limit) || 10;  // จำนวนข้อมูลต่อหน้า
+  const offset = (page - 1) * limit;  // คำนวณการข้ามข้อมูล (offset)
+
   try {
     const pool = await poolPromise;
     const result = await pool.request().query(`
@@ -30,9 +60,20 @@ exports.getAllOrders = async (req, res) => {
       FROM Orders
       JOIN OrderItems ON Orders.OrderId = OrderItems.OrderId
       JOIN Products ON OrderItems.ProductId = Products.ProductId
+      ORDER BY Orders.OrderDate DESC
+      OFFSET ${offset} ROWS FETCH NEXT ${limit} ROWS ONLY;
     `);
 
-    res.status(200).json(result.recordset);
+    // ดึงจำนวนรายการทั้งหมด
+    const totalOrdersResult = await pool.request().query(`SELECT COUNT(*) as total FROM Orders`);
+    const totalOrders = totalOrdersResult.recordset[0].total;
+
+    res.status(200).json({
+      data: result.recordset,
+      currentPage: page,
+      totalPages: Math.ceil(totalOrders / limit),
+      totalOrders: totalOrders,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error fetching orders", error });
   }
@@ -93,8 +134,13 @@ exports.cancelOrder = async (req, res) => {
 };
 
 // ดึงข้อมูลประวัติคำสั่งซื้อ (Delivered Successfully และ Cancelled)
+// ดึงข้อมูลประวัติคำสั่งซื้อ (Delivered Successfully และ Cancelled) พร้อม Pagination
 exports.getOrderHistory = async (req, res) => {
-  const userId = req.params.userId; // สมมติว่าดึงคำสั่งซื้อของผู้ใช้ที่ระบุ
+  const userId = req.params.userId;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = (page - 1) * limit;
+
   try {
     const pool = await poolPromise;
     const result = await pool.request().input("UserId", userId).query(`
@@ -105,9 +151,24 @@ exports.getOrderHistory = async (req, res) => {
       JOIN Products ON OrderItems.ProductId = Products.ProductId
       WHERE Orders.UserId = @UserId 
         AND (Orders.Status = 'Delivered Successfully' OR Orders.Status = 'Cancelled')
+      ORDER BY Orders.OrderDate DESC
+      OFFSET ${offset} ROWS FETCH NEXT ${limit} ROWS ONLY;
     `);
 
-    res.status(200).json(result.recordset);
+    // ดึงจำนวนรายการทั้งหมด
+    const totalOrdersResult = await pool.request().input("UserId", userId).query(`
+      SELECT COUNT(*) as total FROM Orders 
+      WHERE Orders.UserId = @UserId 
+        AND (Orders.Status = 'Delivered Successfully' OR Orders.Status = 'Cancelled')
+    `);
+    const totalOrders = totalOrdersResult.recordset[0].total;
+
+    res.status(200).json({
+      data: result.recordset,
+      currentPage: page,
+      totalPages: Math.ceil(totalOrders / limit),
+      totalOrders: totalOrders,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error fetching order history", error });
   }

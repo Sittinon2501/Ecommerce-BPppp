@@ -11,6 +11,9 @@ import { CategoryService } from '../../services/category.service';
 export class CategoryComponent implements OnInit {
   categories: any[] = [];
   userEmail: string = '';
+  currentPage: number = 1; // หน้าปัจจุบัน
+  totalPages: number = 1; // จำนวนหน้าทั้งหมด
+  limit: number = 6; // จำนวนรายการต่อหน้า (ปรับเป็น 6)
 
   constructor(
     private categoryService: CategoryService, 
@@ -28,12 +31,14 @@ export class CategoryComponent implements OnInit {
       console.log(this.userEmail);
     }
 
-    this.loadCategories();
+    this.loadCategories(this.currentPage); // โหลดหมวดหมู่สำหรับหน้าปัจจุบัน
   }
 
-  loadCategories(): void {
-    this.categoryService.getCategories().subscribe((data: any[]) => {
-      this.categories = data;
+  loadCategories(page: number): void {
+    this.categoryService.getCategoriesWithPagination(page, this.limit).subscribe((response: any) => {
+      this.categories = response.data; // เก็บข้อมูลหมวดหมู่ที่ได้รับ
+      this.currentPage = response.currentPage; // อัปเดตหน้าปัจจุบัน
+      this.totalPages = response.totalPages; // อัปเดตจำนวนหน้าทั้งหมด
       console.log('Categories:', this.categories); // ตรวจสอบค่าของ categories
     });
   }
@@ -44,6 +49,22 @@ export class CategoryComponent implements OnInit {
       this.router.navigate(['/products'], { queryParams: { category: categoryId } });
     } else {
       console.error('Invalid category ID');
+    }
+  }
+
+  // ฟังก์ชันสำหรับไปยังหน้าถัดไป
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadCategories(this.currentPage);
+    }
+  }
+
+  // ฟังก์ชันสำหรับไปยังหน้าก่อนหน้า
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadCategories(this.currentPage);
     }
   }
 }

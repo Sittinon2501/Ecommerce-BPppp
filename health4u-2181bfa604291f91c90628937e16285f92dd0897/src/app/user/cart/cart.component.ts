@@ -10,32 +10,38 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  cartItems: any[] = [];
-  totalAmount: number = 0;
-  selectedItems: any[] = [];
+  cartItems: any[] = []; // เก็บข้อมูลสินค้าทั้งหมดในตะกร้า
+  totalAmount: number = 0; // เก็บยอดรวมราคาสินค้าในตะกร้า
+  selectedItems: any[] = []; // เก็บสินค้าที่ถูกเลือกเพื่อ checkout
+  currentPage: number = 1;  // หน้าปัจจุบันสำหรับ pagination
+  totalPages: number = 1;  // จำนวนหน้าทั้งหมด
+  limit: number = 10;  // จำนวนรายการต่อหน้า
 
   constructor(
     private cartService: CartService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  // เรียกใช้ทุกครั้งที่โหลดหน้าเว็บใหม่ เพื่อดึงข้อมูลจาก backend
+  // ฟังก์ชันที่จะเรียกใช้เมื่อ component ถูกโหลด
   ngOnInit(): void {
-    this.loadCart();
+    this.loadCart(this.currentPage); // เรียกใช้ฟังก์ชันการโหลดสินค้าในตะกร้าสำหรับหน้าปัจจุบัน
   }
 
-  loadCart(): void {
+  // ฟังก์ชันสำหรับโหลดข้อมูลตะกร้าพร้อมกับ Pagination
+  loadCart(page: number): void {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
       if (token) {
-        const decoded: any = jwtDecode(token); // ใช้ jwtDecode เพื่อแยกข้อมูล userId จาก token
+        const decoded: any = jwtDecode(token); // ถอดรหัส token เพื่อดึงข้อมูล userId
         const userId = decoded.id;
-  
-        // ดึงข้อมูล cart จาก backend
-        this.cartService.getCart(userId).subscribe(
-          (data) => {
-            this.cartItems = data;
-            this.calculateTotal();  // คำนวณยอดรวมของสินค้าใน cart
+
+        // ดึงข้อมูลตะกร้าจาก backend
+        this.cartService.getCart(userId, page, this.limit).subscribe(
+          (response: any) => {
+            this.cartItems = response.data; // เก็บสินค้าที่ได้จาก backend ใน cartItems
+            this.currentPage = response.currentPage; // อัปเดตหน้าปัจจุบัน
+            this.totalPages = response.totalPages; // อัปเดตจำนวนหน้าทั้งหมด
+            this.calculateTotal();  // คำนวณยอดรวมของสินค้าในตะกร้า
           },
           (error) => {
             console.error('Error loading cart:', error);
@@ -44,13 +50,26 @@ export class CartComponent implements OnInit {
       } else {
         console.error('No token found');
       }
-    } else {
-      console.error('Not in browser environment');
     }
   }
-  
-  
 
+  // ฟังก์ชันสำหรับเปลี่ยนไปยังหน้าถัดไป
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadCart(this.currentPage); // โหลดสินค้าสำหรับหน้าถัดไป
+    }
+  }
+
+  // ฟังก์ชันสำหรับเปลี่ยนไปยังหน้าก่อนหน้า
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadCart(this.currentPage); // โหลดสินค้าสำหรับหน้าก่อนหน้า
+    }
+  }
+
+  // ฟังก์ชันสำหรับลบสินค้าจากตะกร้า
   removeFromCart(cartId: number): void {
     Swal.fire({
       title: 'Are you sure?',
@@ -68,7 +87,7 @@ export class CartComponent implements OnInit {
               'The item has been removed from your cart.',
               'success'
             );
-            this.loadCart(); // เรียกใช้ loadCart หลังจากลบสินค้าออกจากตะกร้า
+            this.loadCart(this.currentPage); // โหลดข้อมูลตะกร้าใหม่หลังจากลบสินค้าออกแล้ว
           },
           (error) => {
             console.error('Error removing item from cart:', error);
@@ -83,6 +102,7 @@ export class CartComponent implements OnInit {
     });
   }
 
+  // ฟังก์ชันสำหรับอัปเดตจำนวนสินค้าในตะกร้า
   updateQuantity(cartId: number, quantity: number, stock: number): void {
     if (quantity > stock) {
       Swal.fire({
@@ -107,7 +127,7 @@ export class CartComponent implements OnInit {
     } else {
       this.cartService.updateQuantity(cartId, quantity).subscribe(
         () => {
-          this.loadCart();
+          this.loadCart(this.currentPage); // โหลดข้อมูลตะกร้าใหม่หลังจากอัปเดตจำนวนสินค้า
         },
         (error) => {
           console.error('Error updating cart quantity:', error);
@@ -116,6 +136,7 @@ export class CartComponent implements OnInit {
     }
   }
 
+  // ฟังก์ชันคำนวณยอดรวมสินค้าในตะกร้า
   calculateTotal(): void {
     this.totalAmount = this.selectedItems.reduce((sum, item) => {
       const price = parseFloat(item.Price) || 0;
@@ -124,6 +145,7 @@ export class CartComponent implements OnInit {
     }, 0);
   }
 
+  // ฟังก์ชันสำหรับเลือกหรือยกเลิกการเลือกสินค้าในตะกร้า
   toggleItemSelection(item: any): void {
     const index = this.selectedItems.findIndex(
       (selected) => selected.CartId === item.CartId
@@ -136,32 +158,25 @@ export class CartComponent implements OnInit {
     this.calculateTotal(); // อัปเดตราคาทั้งหมดตามสินค้าที่เลือก
   }
 
+  // ฟังก์ชันสำหรับ Checkout สินค้าที่เลือก
   checkout(): void {
     if (this.selectedItems.length === 0) {
-      Swal.fire(
-        'Error',
-        'Please select at least one item to checkout.',
-        'error'
-      );
+      Swal.fire('Error', 'Please select at least one item to checkout.', 'error');
       return;
     }
-  
+
     const token = localStorage.getItem('token');
     if (!token) {
-      Swal.fire(
-        'Error',
-        'Please log in to proceed with checkout.',
-        'error'
-      );
+      Swal.fire('Error', 'Please log in to proceed with checkout.', 'error');
       return;
     }
-  
+
     const decoded: any = jwtDecode(token); // ดึง userId จาก token
     const userId = decoded.id;
-  
+
     let outOfStockItems = [];
     let stockChecked = 0;
-  
+
     for (let item of this.selectedItems) {
       this.cartService.checkStock(item.ProductId).subscribe(
         (product) => {
@@ -169,7 +184,7 @@ export class CartComponent implements OnInit {
           if (product.Stock < item.Quantity) {
             outOfStockItems.push(item);
           }
-  
+
           if (stockChecked === this.selectedItems.length) {
             if (outOfStockItems.length > 0) {
               Swal.fire(
@@ -183,30 +198,22 @@ export class CartComponent implements OnInit {
                 total: this.totalAmount,
                 userId: userId, // เพิ่ม userId ใน cartData
               };
-  
+
               this.cartService.checkout(cartData).subscribe(
                 () => {
-                  Swal.fire(
-                    'Success',
-                    'Checkout completed successfully',
-                    'success'
-                  );
-  
-                  // ลบเฉพาะรายการที่ถูก checkout ออกจาก cartItems
+                  Swal.fire('Success', 'Checkout completed successfully', 'success');
+
+                  // ลบรายการที่ถูก checkout ออกจาก cartItems
                   this.cartItems = this.cartItems.filter(
                     (item) => !this.selectedItems.includes(item)
                   );
-  
+
                   this.selectedItems = [];
                   this.calculateTotal();
                 },
                 (error) => {
                   console.error('Error during checkout:', error);
-                  Swal.fire(
-                    'Error',
-                    error.error.message || 'Checkout failed',
-                    'error'
-                  );
+                  Swal.fire('Error', error.error.message || 'Checkout failed', 'error');
                 }
               );
             }
@@ -218,4 +225,4 @@ export class CartComponent implements OnInit {
       );
     }
   }
-}  
+}

@@ -20,13 +20,11 @@
             <input type="checkbox" (change)="toggleItemSelection(item)" [checked]="selectedItems.includes(item)" />
           </td>
           <td>
-            <img [src]="'http://localhost:3000' + item.ImageUrl" alt="Product Image" class="img-thumbnail"
-              width="100" />
+            <img [src]="'http://localhost:3000' + item.ImageUrl" alt="Product Image" class="img-thumbnail" width="100" />
           </td>
           <td>{{ item.ProductName }}</td>
           <td>
-            <input type="number" class="form-control w-50 d-inline" [(ngModel)]="item.Quantity" min="1"
-              [max]="item.Stock" (change)="updateQuantity(item.CartId, item.Quantity, item.Stock)" />
+            <input type="number" class="form-control w-50 d-inline" [(ngModel)]="item.Quantity" min="1" [max]="item.Stock" (change)="updateQuantity(item.CartId, item.Quantity, item.Stock)" />
           </td>
 
           <td>{{ item.Price | number: '1.2-2' }} THB</td>
@@ -38,8 +36,14 @@
           </td>
         </tr>
       </tbody>
-
     </table>
+
+    <!-- Pagination Buttons -->
+    <div class="pagination">
+      <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
 
     <div class="d-flex justify-content-between align-items-center">
       <h4>Total: {{ totalAmount | number: '1.2-2' }} THB</h4>

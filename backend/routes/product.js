@@ -5,6 +5,7 @@ const {
   addProduct,
   deleteProduct,
   updateProduct,
+  getProductsWithPagination,
 } = require('../controllers/productController');
 const multer = require('multer');
 
@@ -24,6 +25,7 @@ const upload = multer({ storage: storage });
 
 // เส้นทาง API สำหรับการจัดการสินค้า
 router.get('/', getProducts);
+router.get('/pagination', getProductsWithPagination); // ดึงสินค้าพร้อม Pagination
 router.get('/:id', getProductById);
 router.post('/', upload.single('image'), addProduct); // เพิ่ม middleware สำหรับการอัปโหลดไฟล์
 router.put('/:id', upload.single('image'), updateProduct); // เพิ่ม middleware สำหรับการอัปโหลดไฟล์

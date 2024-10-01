@@ -31,6 +31,35 @@ exports.getCategories = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+// ดึงหมวดหมู่ทั้งหมดพร้อม Pagination
+exports.getCategoriesWithPagination = async (req, res) => {
+  const page = parseInt(req.query.page) || 1; // หน้าเริ่มต้น
+  const limit = parseInt(req.query.limit) || 6; // จำนวนรายการต่อหน้า
+  const offset = (page - 1) * limit; // คำนวณ offset
+
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query(`
+      SELECT * FROM Categories 
+      ORDER BY CategoryId 
+      OFFSET ${offset} ROWS 
+      FETCH NEXT ${limit} ROWS ONLY
+    `);
+
+    // ดึงจำนวนหมวดหมู่ทั้งหมด
+    const totalCategoriesResult = await pool.request().query('SELECT COUNT(*) as total FROM Categories');
+    const totalCategories = totalCategoriesResult.recordset[0].total;
+
+    res.status(200).json({
+      data: result.recordset,
+      currentPage: page,
+      totalPages: Math.ceil(totalCategories / limit),
+      totalCategories: totalCategories,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 // ดึงหมวดหมู่ตาม ID
 exports.getCategoryById = async (req, res) => {

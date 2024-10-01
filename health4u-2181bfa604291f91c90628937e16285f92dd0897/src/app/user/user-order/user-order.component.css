@@ -143,3 +143,39 @@ button.btn.btn-sm {
   overflow: hidden; /* ป้องกันการล้น */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
 }
+/* Pagination Button Styling with Custom Colors */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.pagination button {
+  background-color: #16423C; /* ใช้สีเขียวเข้มสำหรับปุ่ม */
+  color: white; /* สีของตัวอักษร */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination button:disabled {
+  background-color: #cccccc; /* สีของปุ่มที่ถูก disabled */
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #6A9C89; /* ใช้สีเขียวอ่อนเมื่อ hover */
+  transform: scale(1.05); /* เพิ่มเอฟเฟกต์การขยายเมื่อ hover */
+}
+
+.pagination span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 15px;
+  color: #16423C; /* ใช้สีเขียวเข้มสำหรับข้อความ */
+}

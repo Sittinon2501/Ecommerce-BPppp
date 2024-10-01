@@ -5,7 +5,8 @@
   <div class="row mb-4">
     <div class="col-md-12">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search products..." [(ngModel)]="searchTerm" (input)="onSearch()">
+        <input type="text" class="form-control" placeholder="Search products..." [(ngModel)]="searchTerm"
+          (input)="onSearch()">
         <button class="btn btn-outline-secondary" type="button">
           <i class="bi bi-search"></i>
         </button>
@@ -18,13 +19,14 @@
     <div class="row">
       <div class="col-md-3 mb-4" *ngFor="let product of filteredProducts">
         <div class="card">
-          <img [src]="'http://localhost:3000' + product.ImageUrl" class="card-img-top product-image" alt="{{ product.ProductName }}">
+          <img [src]="'http://localhost:3000' + product.ImageUrl" class="card-img-top product-image"
+            alt="{{ product.ProductName }}">
           <div class="card-body">
             <h5 class="card-title">{{ product.ProductName }}</h5>
             <p class="card-text">
               <strong><i class="bi bi-cash"></i> Price:</strong> {{ product.Price | number:'1.2-2' }} THB
             </p>
-            <a [routerLink]="['/products', product.ProductId]" class="btn btn-primary"> 
+            <a [routerLink]="['/products', product.ProductId]" class="btn btn-primary">
               <i class="bi bi-eye"></i> View Details
             </a>
           </div>
@@ -36,4 +38,15 @@
   <ng-template #noProducts>
     <p>No products available.</p>
   </ng-template>
+  <!-- Pagination Controls -->
+<div class="pagination">
+  <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="pagination-button">
+    Previous
+  </button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="goToNextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+    Next
+  </button>
+</div>
+
 </div>

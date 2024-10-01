@@ -81,3 +81,38 @@
 .table-responsive {
   overflow-x: auto;
 }
+/* Pagination Styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007bff; /* สีพื้นหลังของปุ่ม */
+  color: white; /* สีของตัวอักษร */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:disabled {
+  background-color: #cccccc; /* สีของปุ่มที่ถูก disabled */
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3; /* สีของปุ่มเมื่อ hover */
+}
+
+/* Pagination text (Page x of y) */
+.pagination span {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 15px;
+}

@@ -11,9 +11,10 @@ export class CartService {
   constructor(private http: HttpClient) {}
 
   // ฟังก์ชันสำหรับดึงข้อมูลตะกร้าสินค้า
-  getCart(userId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/${userId}`);
-  }
+  // ฟังก์ชันสำหรับดึงข้อมูลตะกร้าสินค้า พร้อม Pagination
+getCart(userId: number, page: number, limit: number): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/${userId}?page=${page}&limit=${limit}`);
+}
 
   // ฟังก์ชันสำหรับเพิ่มสินค้าในตะกร้า
   addToCart(cartItem: any): Observable<any> {

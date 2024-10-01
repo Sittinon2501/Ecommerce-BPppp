@@ -10,10 +10,9 @@ export class UserOrderService {
 
   constructor(private http: HttpClient) {}
 
-  getUserOrders(userId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user/${userId}`);
+  getUserOrders(userId: number, page: number, limit: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${userId}?page=${page}&limit=${limit}`);
   }
-  
   getAllOrders(): Observable<any> {
     return this.http.get(`${this.apiUrl}/admin`);
   }
@@ -26,7 +25,12 @@ export class UserOrderService {
     return this.http.put(`${this.apiUrl}/cancel/${orderId}`, { status: 'Cancelled' });
   }
    // ฟังก์ชันสำหรับดึงประวัติคำสั่งซื้อ
-   getOrderHistory(userId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/history/${userId}`);
+   getOrderHistory(userId: number, page: number, limit: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/history/${userId}?page=${page}&limit=${limit}`);
   }
+   // ดึงสินค้าพร้อม Pagination
+  getProductsWithPagination(page: number, limit: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/pagination?page=${page}&limit=${limit}`);
+  }
+
 }
