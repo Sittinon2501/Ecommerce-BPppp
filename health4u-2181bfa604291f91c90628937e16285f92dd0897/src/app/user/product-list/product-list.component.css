@@ -88,3 +88,34 @@ h2 {
   font-weight: 700;
   margin-bottom: 20px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  background-color: #16423C; /* สีพื้นหลัง */
+  color: white; /* สีตัวอักษร */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; /* ให้ลูกศรเปลี่ยนเมื่อชี้ไปที่ปุ่ม */
+  transition: background-color 0.3s, transform 0.2s; /* เพิ่มการเปลี่ยนแปลงขนาด */
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #6A9C89; /* สีพื้นหลังเมื่อ hover */
+  transform: scale(1.05); /* เพิ่มขนาดเล็กน้อยเมื่อ hover */
+}
+
+.pagination-button:disabled {
+  background-color: #ccc; /* สีพื้นหลังสำหรับปุ่มที่ไม่สามารถกดได้ */
+  color: #666; /* สีตัวอักษรสำหรับปุ่มที่ไม่สามารถกดได้ */
+  cursor: not-allowed; /* เปลี่ยนลูกศรเมื่อชี้ไปที่ปุ่มที่ไม่สามารถกดได้ */
+  position: relative;
+} 

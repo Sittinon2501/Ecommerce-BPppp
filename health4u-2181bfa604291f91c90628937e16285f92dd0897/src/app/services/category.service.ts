@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Category } from '../models/category';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
   private apiUrl = 'http://localhost:3000/api/categories';
@@ -13,6 +13,11 @@ export class CategoryService {
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.apiUrl);
+  }
+  getCategoriesWithPagination(page: number, limit: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.apiUrl}/pagination?page=${page}&limit=${limit}`
+    );
   }
 
   addCategory(categoryData: FormData): Observable<Category> {

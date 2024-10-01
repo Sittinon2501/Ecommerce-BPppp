@@ -51,14 +51,20 @@
     <div class="row">
       <div class="col-md-4 mb-3" *ngFor="let category of categories">
         <div class="card" (click)="viewProducts(category.CategoryId)" style="cursor: pointer;">
-          <!-- ทำให้ card กดได้ -->
-          <img [src]="'http://localhost:3000' + category.ImageUrl" class="card-img-top" alt="Category Image" width="5">
+          <img [src]="'http://localhost:3000' + category.ImageUrl" class="card-img-top" alt="Category Image">
           <div class="card-body">
             <h5 class="card-title" style="color: #16423C; font-size: 1.2rem;">{{ category.CategoryName }}</h5>
-            <!-- ขยายตัวหนังสือหมวดหมู่ -->
           </div>
         </div>
       </div>
     </div>
+
+    <div class="pagination">
+      <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
   </div>
+
+
 </div>

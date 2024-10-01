@@ -9,7 +9,7 @@ interface Order {
   Quantity: number;
   Price: number;
   Status: string;
-  OrderDate: string;  // เพิ่มฟิลด์ OrderDate
+  OrderDate: string;
   formattedDate?: string;
 }
 
@@ -20,20 +20,22 @@ interface Order {
 })
 export class AdminOrderComponent implements OnInit {
   orders: Order[] = [];
+  currentPage: number = 1;
+  totalPages: number = 1;
 
   constructor(private adminOrderService: AdminOrderService) {}
 
   ngOnInit(): void {
-    this.loadOrders();
+    this.loadOrders(this.currentPage);
   }
 
-  loadOrders(): void {
-    this.adminOrderService.getOrders().subscribe(
-      (data: Order[]) => {  // กำหนดประเภทให้ข้อมูลที่ได้รับจาก API
-        this.orders = data.map(order => ({
-          ...order,
-          formattedDate: new Date(order.OrderDate).toLocaleDateString()
-        }));
+  // ฟังก์ชันสำหรับโหลดข้อมูลคำสั่งซื้อในหน้าที่ต้องการ
+  loadOrders(page: number): void {
+    this.adminOrderService.getOrders(page, 10).subscribe(
+      (response: any) => {
+        this.orders = response.data;
+        this.currentPage = response.currentPage;
+        this.totalPages = response.totalPages;
       },
       (error) => {
         console.error('Error loading orders:', error);
@@ -41,11 +43,28 @@ export class AdminOrderComponent implements OnInit {
     );
   }
 
+  // ฟังก์ชันสำหรับไปยังหน้าถัดไป
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadOrders(this.currentPage);
+    }
+  }
+
+  // ฟังก์ชันสำหรับไปยังหน้าก่อนหน้า
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadOrders(this.currentPage);
+    }
+  }
+
+  // ฟังก์ชันสำหรับอัปเดตสถานะคำสั่งซื้อ
   updateOrderStatus(orderId: number, status: string): void {
     this.adminOrderService.updateOrderStatus(orderId, status).subscribe(
       () => {
         Swal.fire('Success', 'Order status updated successfully!', 'success');
-        this.loadOrders();
+        this.loadOrders(this.currentPage);
       },
       (error) => {
         console.error('Error updating order status:', error);

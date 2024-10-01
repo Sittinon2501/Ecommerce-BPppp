@@ -7,15 +7,18 @@ exports.getUser = async (req, res) => {
   const userId = req.params.id;
 
   if (!userId) {
-    return res.status(400).json({ message: 'User ID is required' });
+    return res.status(400).json({ message: "User ID is required" });
   }
 
   try {
     const pool = await poolPromise;
-    const result = await pool.request().input("UserId", userId).query("SELECT * FROM Users WHERE UserId = @UserId");
+    const result = await pool
+      .request()
+      .input("UserId", userId)
+      .query("SELECT * FROM Users WHERE UserId = @UserId");
 
     if (result.recordset.length === 0) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     res.json(result.recordset[0]);
@@ -30,7 +33,9 @@ exports.register = async (req, res) => {
 
   // ตรวจสอบว่ามีการส่งข้อมูลครบหรือไม่
   if (!name || !email || !password) {
-    return res.status(400).json({ message: 'Please provide all required fields' });
+    return res
+      .status(400)
+      .json({ message: "Please provide all required fields" });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -54,7 +59,7 @@ exports.register = async (req, res) => {
       .input("Name", name)
       .input("Email", email)
       .input("Password", hashedPassword)
-      .input("Role", "User")  // ค่าเริ่มต้นคือ 'User'
+      .input("Role", "User") // ค่าเริ่มต้นคือ 'User'
       .query(
         `INSERT INTO Users (Name, Email, Password, Role) VALUES (@Name, @Email, @Password, @Role)`
       );
@@ -94,12 +99,12 @@ exports.login = async (req, res) => {
     }
 
     // สร้าง token
-    const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
-    const token = jwt.sign(
-      { id: user.UserId, role: user.Role },
-      jwtSecret,
-      { expiresIn: "1h" }
-    );
+    const jwtSecret =
+      process.env.JWT_SECRET ||
+      "e1a8260159f48b183d290c5c33f010c9ba01190f9adda8fc6e98049fe2f06519626309bd4af3d56ec17386f4577c2e3725450e4fdf4548cffd9e25eb7da8908a";
+    const token = jwt.sign({ id: user.UserId, role: user.Role }, jwtSecret, {
+      expiresIn: "1h",
+    });
 
     // ส่ง token และข้อมูลผู้ใช้กลับไปยัง frontend
     res.json({
@@ -120,11 +125,14 @@ exports.login = async (req, res) => {
 exports.getCurrentUser = (req, res) => {
   const token = req.header("Authorization");
 
-  if (!token) return res.status(401).json({ message: "No token, authorization denied" });
+  if (!token)
+    return res.status(401).json({ message: "No token, authorization denied" });
 
   try {
-    const jwtSecret = process.env.JWT_SECRET || "your_jwt_secret";
-    const decoded = jwt.verify(token.split(' ')[1], jwtSecret); // ตรวจสอบ token ที่มากับ Bearer
+    const jwtSecret =
+      process.env.JWT_SECRET ||
+      "e1a8260159f48b183d290c5c33f010c9ba01190f9adda8fc6e98049fe2f06519626309bd4af3d56ec17386f4577c2e3725450e4fdf4548cffd9e25eb7da8908a";
+    const decoded = jwt.verify(token.split(" ")[1], jwtSecret); // ตรวจสอบ token ที่มากับ Bearer
     res.json(decoded);
   } catch (err) {
     res.status(400).json({ message: "Token is not valid" });

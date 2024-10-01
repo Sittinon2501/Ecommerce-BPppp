@@ -18,8 +18,7 @@
         <td>{{ order.OrderId }}</td>
         <td>{{ order.ProductName }}</td>
         <td>
-          <img [src]="'http://localhost:3000' + order.ImageUrl" alt="Product Image" class="img-thumbnail"
-            style="width: 100px;">
+          <img [src]="'http://localhost:3000' + order.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 100px;">
         </td>
         <td>{{ order.Quantity }}</td>
         <td>{{ order.Price | number: '1.2-2' }} THB</td>
@@ -29,14 +28,19 @@
             <option value="Pending">Pending</option>
             <option value="Processing">Processing</option>
             <option value="Shipped">Shipped</option>
-            <option value="In Transit">In Transit</option> <!-- New status: In Transit -->
+            <option value="In Transit">In Transit</option>
             <option value="Delivered Successfully">Delivered Successfully</option>
-            <!-- New status: Delivered Successfully -->
             <option value="Cancelled">Cancelled</option>
           </select>
-
         </td>
       </tr>
     </tbody>
   </table>
+
+  <!-- Pagination Buttons -->
+  <div class="pagination">
+    <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
 </div>

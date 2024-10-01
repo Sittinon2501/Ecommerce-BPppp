@@ -89,3 +89,39 @@ body {
   max-width: 1600px; /* จำกัดความกว้างสูงสุด */
   margin: 0 auto; /* จัดให้อยู่ตรงกลางหน้าจอ */
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.pagination button {
+  background-color: #C4DAD2; /* ใช้สีเขียวเข้มสำหรับปุ่ม */
+  color: white; /* สีของตัวอักษร */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination button:disabled {
+  background-color: #cccccc; /* สีของปุ่มที่ถูก disabled */
+  cursor: not-allowed;
+  opacity: 0.6; /* ปรับความโปร่งแสงเพื่อแสดงว่าไม่สามารถกดได้ */
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #16423C; /* ใช้สีเขียวอ่อนเมื่อ hover */
+  transform: scale(1.05); /* เพิ่มเอฟเฟกต์การขยายเมื่อ hover */
+}
+
+.pagination span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 15px;
+  color: #16423C; /* ใช้สีเขียวเข้มสำหรับข้อความ */
+}

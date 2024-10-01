@@ -16,9 +16,18 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);
   }
-
+  getProductsWithPagination(
+    page: number,
+    limit: number,
+    categoryId: number | null
+  ): Observable<any> {
+    const categoryParam =
+      categoryId !== null ? `&categoryId=${categoryId}` : '';
+    return this.http.get<any>(
+      `${this.apiUrl}/pagination?page=${page}&limit=${limit}${categoryParam}`
+    );
+  }
   // ดึงสินค้าตามหมวดหมู่
-  // product.service.ts
   getProductsByCategory(categoryId: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiUrl}?categoryId=${categoryId}`);
   }
@@ -38,9 +47,8 @@ export class ProductService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-   // ดึงข้อมูลสินค้าตาม ID
-   getProductById(id: number): Observable<Product> {
+  // ดึงข้อมูลสินค้าตาม ID
+  getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
-
 }

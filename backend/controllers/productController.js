@@ -32,6 +32,47 @@ exports.getProducts = async (req, res) => {
   }
 };
 
+// ดึงสินค้าพร้อม Pagination
+exports.getProductsWithPagination = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = (page - 1) * limit;
+  const categoryId = req.query.categoryId;
+
+  try {
+    const pool = await poolPromise;
+    let query = `
+      SELECT * FROM Products
+      ${categoryId ? 'WHERE CategoryId = @CategoryId' : ''}
+      ORDER BY ProductId
+      OFFSET ${offset} ROWS
+      FETCH NEXT ${limit} ROWS ONLY;
+    `;
+
+    const result = await pool.request()
+      .input('CategoryId', categoryId)
+      .query(query);
+
+    // Calculate total products for pagination
+    const totalQuery = `
+      SELECT COUNT(*) as total FROM Products
+      ${categoryId ? 'WHERE CategoryId = @CategoryId' : ''};
+    `;
+    const totalResult = await pool.request()
+      .input('CategoryId', categoryId)
+      .query(totalQuery);
+
+    res.json({
+      data: result.recordset,
+      currentPage: page,
+      totalPages: Math.ceil(totalResult.recordset[0].total / limit),
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
 // ดึงสินค้าตาม ID
 exports.getProductById = async (req, res) => {
   const { id } = req.params;

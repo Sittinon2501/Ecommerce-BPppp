@@ -10,8 +10,9 @@ export class AdminOrderService {
 
   constructor(private http: HttpClient) {}
 
-  getOrders(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/admin`);
+  // ฟังก์ชันดึงข้อมูลคำสั่งซื้อพร้อม pagination (ส่ง page และ limit)
+  getOrders(page: number, limit: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/admin?page=${page}&limit=${limit}`);
   }
 
   updateOrderStatus(orderId: number, status: string): Observable<any> {
