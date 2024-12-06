@@ -23,8 +23,7 @@
         <td>{{ order.Quantity }}</td>
         <td>{{ order.Price | number:'1.2-2' }}&nbsp;THB</td>
         <td>{{ (order.Quantity * order.Price) | number:'1.2-2' }}&nbsp;THB</td>
-        <td>{{ order.formattedDate }}</td>
-        <td>
+        <td>{{ order.OrderDate | date:'mediumDate' }}</td>        <td>
           <span class="status-badge status-{{ order.Status.toLowerCase() }}">{{ order.Status }}</span>
         </td>
         <td>
