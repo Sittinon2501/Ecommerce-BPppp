@@ -43,7 +43,7 @@
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
-            "baseHref": "/",  
+            "baseHref": "/",
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -76,6 +76,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "outputPath": "dist/health4u",
+            "publicHost": "https://ecommerce-bp.onrender.com"
+          },
           "configurations": {
             "production": {
               "buildTarget": "health4u:build:production"
