@@ -1,0 +1,3 @@
+build:
+  publish: dist/health4u
+  command: npm run build --prod
