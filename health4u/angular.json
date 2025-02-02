@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/health4u/browser",
+            "outputPath": "dist/health4u",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -77,7 +77,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "outputPath": "dist/health4u/browser",
+            "outputPath": "dist/health4u",
             "publicHost": "https://ecommerce-bp.onrender.com"
           },
           "configurations": {
